@@ -1,0 +1,45 @@
+ID: plan_it
+_schema-version: '2.0'
+description: Project pricing application
+version: 0.0.1
+modules:
+  - name: plandb
+    type: hdb
+    path: plandb
+    requires:
+      - name: hdi-container
+  - name: planjs
+    type: nodejs
+    path: planjs
+    provides:
+      - name: planjs_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: plandb
+      - name: hdi-container
+
+  
+
+
+  
+
+
+  - name: planui
+    type: html5
+    path: planui
+    requires:
+     - name: planjs_api
+       group: destinations
+       properties:
+          name: planjs_be
+          url: ~{url}
+
+resources:
+  - name: hdi-container
+    parameters:
+      config:
+        schema: PLAN_IT
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container

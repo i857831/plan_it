@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="plan_it.plandb.calc_views::PlAttrResource" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="PlAttrResource"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="plan_it.plandb::data.PlanAttributes">
+    <resourceUri>plan_it.plandb::data.PlanAttributes</resourceUri>
+  </DataSource>
+  <DataSource id="plan_it.plandb::data.Resource">
+    <resourceUri>plan_it.plandb::data.Resource</resourceUri>
+  </DataSource>
+  <DataSource id="plan_it.plandb::data.RevenueRate">
+    <resourceUri>plan_it.plandb::data.RevenueRate</resourceUri>
+  </DataSource>
+  <DataSource id="plan_it.plandb::data.PlanStructure">
+    <resourceUri>plan_it.plandb::data.PlanStructure</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_1" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="ID" aggregationType="sum">
+        <descriptions defaultDescription="ID"/>
+      </viewAttribute>
+      <viewAttribute id="resource_id" aggregationType="sum">
+        <descriptions defaultDescription="resource_id"/>
+      </viewAttribute>
+      <viewAttribute id="revenue_rate_id" aggregationType="sum">
+        <descriptions defaultDescription="revenue_rate_id"/>
+      </viewAttribute>
+      <viewAttribute id="str_elemet_id" aggregationType="sum">
+        <descriptions defaultDescription="str_elemet_id"/>
+      </viewAttribute>
+      <viewAttribute id="travel_variant_id" aggregationType="sum">
+        <descriptions defaultDescription="travel_variant_id"/>
+      </viewAttribute>
+      <viewAttribute id="version_id" aggregationType="sum">
+        <descriptions defaultDescription="version_id"/>
+      </viewAttribute>
+      <viewAttribute id="resource_name">
+        <descriptions defaultDescription="description"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="plan_it.plandb::data.PlanAttributes">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="resource_id" source="resource.id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="revenue_rate_id" source="revenue_rate.id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="str_elemet_id" source="str_elemet.id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="travel_variant_id" source="travel_variant.id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="version_id" source="version.id"/>
+    </input>
+    <input node="plan_it.plandb::data.Resource">
+      <mapping xsi:type="Calculation:AttributeMapping" target="resource_name" source="description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="resource_id" source="id"/>
+    </input>
+    <joinAttribute name="resource_id"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" cardinality="C1_1" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="rev_rate_name">
+        <descriptions defaultDescription="description"/>
+      </viewAttribute>
+      <viewAttribute id="ID" aggregationType="sum">
+        <descriptions defaultDescription="ID"/>
+      </viewAttribute>
+      <viewAttribute id="resource_id" aggregationType="sum">
+        <descriptions defaultDescription="resource_id"/>
+      </viewAttribute>
+      <viewAttribute id="revenue_rate_id" aggregationType="sum">
+        <descriptions defaultDescription="revenue_rate_id"/>
+      </viewAttribute>
+      <viewAttribute id="str_elemet_id" aggregationType="sum">
+        <descriptions defaultDescription="str_elemet_id"/>
+      </viewAttribute>
+      <viewAttribute id="travel_variant_id" aggregationType="sum">
+        <descriptions defaultDescription="travel_variant_id"/>
+      </viewAttribute>
+      <viewAttribute id="version_id" aggregationType="sum">
+        <descriptions defaultDescription="version_id"/>
+      </viewAttribute>
+      <viewAttribute id="description">
+        <descriptions defaultDescription="description"/>
+      </viewAttribute>
+      <viewAttribute hidden="true" id="JOIN$id$revenue_rate_id"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="plan_it.plandb::data.RevenueRate">
+      <mapping xsi:type="Calculation:AttributeMapping" target="rev_rate_name" source="description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$id$revenue_rate_id" source="id"/>
+    </input>
+    <input node="Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="resource_id" source="resource_id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="revenue_rate_id" source="revenue_rate_id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="str_elemet_id" source="str_elemet_id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="travel_variant_id" source="travel_variant_id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="version_id" source="version_id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="description" source="resource_name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$id$revenue_rate_id" source="revenue_rate_id"/>
+    </input>
+    <joinAttribute name="JOIN$id$revenue_rate_id"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="structure_element">
+        <descriptions defaultDescription="description"/>
+      </viewAttribute>
+      <viewAttribute id="rev_rate_name">
+        <descriptions defaultDescription="rev_rate_name"/>
+      </viewAttribute>
+      <viewAttribute id="ID" aggregationType="sum">
+        <descriptions defaultDescription="ID"/>
+      </viewAttribute>
+      <viewAttribute id="resource_id" aggregationType="sum">
+        <descriptions defaultDescription="resource_id"/>
+      </viewAttribute>
+      <viewAttribute id="revenue_rate_id" aggregationType="sum">
+        <descriptions defaultDescription="revenue_rate_id"/>
+      </viewAttribute>
+      <viewAttribute id="str_elemet_id" aggregationType="sum">
+        <descriptions defaultDescription="str_elemet_id"/>
+      </viewAttribute>
+      <viewAttribute id="travel_variant_id" aggregationType="sum">
+        <descriptions defaultDescription="travel_variant_id"/>
+      </viewAttribute>
+      <viewAttribute id="version_id" aggregationType="sum">
+        <descriptions defaultDescription="version_id"/>
+      </viewAttribute>
+      <viewAttribute id="description">
+        <descriptions defaultDescription="description"/>
+      </viewAttribute>
+      <viewAttribute hidden="true" id="JOIN$id$str_elemet_id"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="plan_it.plandb::data.PlanStructure">
+      <mapping xsi:type="Calculation:AttributeMapping" target="structure_element" source="description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$id$str_elemet_id" source="id"/>
+    </input>
+    <input node="Join_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="rev_rate_name" source="rev_rate_name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="resource_id" source="resource_id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="revenue_rate_id" source="revenue_rate_id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="str_elemet_id" source="str_elemet_id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="travel_variant_id" source="travel_variant_id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="version_id" source="version_id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="description" source="description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$id$str_elemet_id" source="str_elemet_id"/>
+    </input>
+    <joinAttribute name="JOIN$id$str_elemet_id"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_3">
+  <attributes>
+    <attribute id="structure_element" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="structure_element"/>
+      <keyMapping columnObjectName="Join_3" columnName="structure_element"/>
+    </attribute>
+    <attribute id="rev_rate_name" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="rev_rate_name"/>
+      <keyMapping columnObjectName="Join_3" columnName="rev_rate_name"/>
+    </attribute>
+    <attribute id="ID" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="Join_3" columnName="ID"/>
+    </attribute>
+    <attribute id="resource_id" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="resource_id"/>
+      <keyMapping columnObjectName="Join_3" columnName="resource_id"/>
+    </attribute>
+    <attribute id="revenue_rate_id" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="revenue_rate_id"/>
+      <keyMapping columnObjectName="Join_3" columnName="revenue_rate_id"/>
+    </attribute>
+    <attribute id="str_elemet_id" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="str_elemet_id"/>
+      <keyMapping columnObjectName="Join_3" columnName="str_elemet_id"/>
+    </attribute>
+    <attribute id="travel_variant_id" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="travel_variant_id"/>
+      <keyMapping columnObjectName="Join_3" columnName="travel_variant_id"/>
+    </attribute>
+    <attribute id="version_id" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="version_id"/>
+      <keyMapping columnObjectName="Join_3" columnName="version_id"/>
+    </attribute>
+    <attribute id="description" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="description"/>
+      <keyMapping columnObjectName="Join_3" columnName="description"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="100" y="105"/>
+    
+      <rectangleSize width="140"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="364"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape modelObjectName="plan_it.plandb::data.PlanAttributes" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="plan_it.plandb::data.Resource" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="277"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape modelObjectName="plan_it.plandb::data.RevenueRate" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="190"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape modelObjectName="plan_it.plandb::data.PlanStructure" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Join_2" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

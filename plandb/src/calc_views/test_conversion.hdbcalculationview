@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="plan_it.plandb.calc_views::test_conversion" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="test_conversion"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="plan_it.plandb::data.Version">
+    <resourceUri>plan_it.plandb::data.Version</resourceUri>
+  </DataSource>
+  <DataSource id="plan_it.plandb::data.Resource">
+    <resourceUri>plan_it.plandb::data.Resource</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="currency">
+        <descriptions defaultDescription="currency"/>
+      </viewAttribute>
+      <viewAttribute id="startDate">
+        <descriptions defaultDescription="startDate"/>
+      </viewAttribute>
+      <viewAttribute id="cost_rate_tc" aggregationType="sum">
+        <descriptions defaultDescription="cost_rate_tc"/>
+      </viewAttribute>
+      <viewAttribute id="currency_tc">
+        <descriptions defaultDescription="currency_tc"/>
+      </viewAttribute>
+      <viewAttribute id="description">
+        <descriptions defaultDescription="description"/>
+      </viewAttribute>
+      <viewAttribute id="id" aggregationType="sum">
+        <descriptions defaultDescription="id"/>
+      </viewAttribute>
+      <viewAttribute id="version_id" aggregationType="sum">
+        <descriptions defaultDescription="version_id"/>
+      </viewAttribute>
+      <viewAttribute hidden="true" id="JOIN$id$version.id"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="plan_it.plandb::data.Version">
+      <mapping xsi:type="Calculation:AttributeMapping" target="currency" source="currency"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="startDate" source="startDate"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$id$version.id" source="id"/>
+    </input>
+    <input node="plan_it.plandb::data.Resource">
+      <mapping xsi:type="Calculation:AttributeMapping" target="cost_rate_tc" source="cost_rate_tc"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="currency_tc" source="currency_tc"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="description" source="description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="id" source="id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="version_id" source="version.id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$id$version.id" source="version.id"/>
+    </input>
+    <joinAttribute name="JOIN$id$version.id"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="currency" order="2" displayAttribute="false" attributeHierarchyActive="false" semanticType="currencyCode">
+      <descriptions defaultDescription="currency"/>
+      <keyMapping columnObjectName="Join_1" columnName="currency"/>
+    </attribute>
+    <attribute id="startDate" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="startDate"/>
+      <keyMapping columnObjectName="Join_1" columnName="startDate"/>
+    </attribute>
+    <attribute id="cost_rate_tc" order="4" semanticType="amount" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="cost_rate_tc"/>
+      <unitCurrencyAttribute attributeName="currency_tc"/>
+      <keyMapping columnObjectName="Join_1" columnName="cost_rate_tc"/>
+    </attribute>
+    <attribute id="currency_tc" order="5" displayAttribute="false" attributeHierarchyActive="false" semanticType="currencyCode">
+      <descriptions defaultDescription="currency_tc"/>
+      <keyMapping columnObjectName="Join_1" columnName="currency_tc"/>
+    </attribute>
+    <attribute id="description" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="description"/>
+      <keyMapping columnObjectName="Join_1" columnName="description"/>
+    </attribute>
+    <attribute id="id" order="7" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="id"/>
+      <keyMapping columnObjectName="Join_1" columnName="id"/>
+    </attribute>
+    <attribute id="version_id" order="8" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="version_id"/>
+      <keyMapping columnObjectName="Join_1" columnName="version_id"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures>
+    <measure id="cost_rate_pc" order="1" semanticType="amount" aggregationType="sum" measureType="amount" datatype="FLOAT" length="13" expressionLanguage="SQL">
+      <descriptions defaultDescription="cost_rate_pc"/>
+      <unitCurrencyAttribute attributeName="currency"/>
+      <currencyConversion generateOutputUnitCurrencyAttribute="false" convert="true">
+        <client>
+          <value>000</value>
+        </client>
+        <currencyConversionTables rates="plan_it.plandb::conv.TCURR" configuration="plan_it.plandb::conv.TCURV" prefactors="plan_it.plandb::conv.TCURF" notations="plan_it.plandb::conv.TCURN" precisions="plan_it.plandb::conv.TCURX"/>
+        <outputDataType datatype="FLOAT" length="13"/>
+        <sourceCurrency>
+          <attribute attributeName="currency_tc"/>
+        </sourceCurrency>
+        <erpDecimalShift>true</erpDecimalShift>
+        <targetCurrency>
+          <attribute attributeName="currency"/>
+        </targetCurrency>
+        <referenceDate>
+          <attribute attributeName="startDate"/>
+        </referenceDate>
+        <exchangeRateType>M</exchangeRateType>
+      </currencyConversion>
+      <formula>&quot;cost_rate_tc&quot;</formula>
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="47" y="243"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape modelObjectName="plan_it.plandb::data.Version" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="plan_it.plandb::data.Resource" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

@@ -1,0 +1,48 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+    <edmx:DataServices
+        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+        <Schema
+            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="default">
+            <EntityType Name="VersionType">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="description" Type="Edm.String" MaxLength="80"/>
+                <Property Name="startDate" Type="Edm.DateTime"/>
+                <Property Name="endDate" Type="Edm.DateTime"/>
+                <Property Name="currency" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="PlAttr" Relationship="default.V_PlanAttributesType" FromRole="VersionPrincipal" ToRole="PlanAttributesDependent"/>
+            </EntityType>
+            <EntityType Name="PlanAttributesType">
+                <Key>
+                    <PropertyRef Name="PlanAttrID"/>
+                </Key>
+                <Property Name="PlanAttrID" Type="Edm.String" Nullable="false" MaxLength="2147483647"/>
+                <Property Name="ID" Type="Edm.Int32"/>
+                <Property Name="resource_id" Type="Edm.Int32"/>
+                <Property Name="revenue_rate_id" Type="Edm.Int32"/>
+                <Property Name="str_elemet_id" Type="Edm.Int32"/>
+                <Property Name="travel_variant_id" Type="Edm.Int32"/>
+                <Property Name="version_id" Type="Edm.Int32"/>
+                <Property Name="resource_name" Type="Edm.String" MaxLength="80"/>
+                <Property Name="rev_rate_name" Type="Edm.String" MaxLength="80"/>
+            </EntityType>
+            <Association Name="V_PlanAttributesType">
+                <End Type="default.VersionType" Role="VersionPrincipal" Multiplicity="1"/>
+                <End Type="default.PlanAttributesType" Role="PlanAttributesDependent" Multiplicity="*"/>
+            </Association>
+            <EntityContainer Name="v2" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="Version" EntityType="default.VersionType"/>
+                <EntitySet Name="PlanAttributes" EntityType="default.PlanAttributesType"/>
+                <AssociationSet Name="V_PlanAttributes" Association="default.V_PlanAttributesType">
+                    <End Role="VersionPrincipal" EntitySet="Version"/>
+                    <End Role="PlanAttributesDependent" EntitySet="PlanAttributes"/>
+                </AssociationSet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

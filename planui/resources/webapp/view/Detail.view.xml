@@ -1,0 +1,149 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="plan.controller.Detail">
+
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+
+		<semantic:content>
+			<ObjectHeader id="objectHeader" title="{description}" numberUnit="{currency}">
+			</ObjectHeader>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://simple-payment" tooltip="{i18n>detailIconTabBarInfo}" key="Planning" text="Planning">
+					<content>
+					    <Table noDataText="Drop column list items here and columns in the area above" id="__table0" items="{ path: 'PlAttr'}" mode="SingleSelectLeft" selectionChange="_onPlAttrSelected">
+					        <items>
+					            <ColumnListItem id="__item0">
+					                <cells>
+					                    <Text text="{structure_element}" id="__text6"/>
+					                    <Text text="{resource_name}" id="__text7"/>
+					                    <Text text="{rev_rate_name}" id="__text8"/></cells>
+					            </ColumnListItem></items>
+					        <columns>
+					            <Column id="__column0">
+					                <header>
+					                    <Label text="Structure Element" id="__label0"/>
+					                </header>
+					            </Column>
+					            <Column id="__column1">
+					                <header>
+					                    <Label text="Resource" id="__label1"/>
+					                </header>
+					            </Column>
+					            <Column id="__column2">
+					                <header>
+					                    <Label text="Revenue Rate" id="__label2"/>
+					                </header>
+					            </Column></columns>
+					        <headerToolbar>
+					            <OverflowToolbar width="100%" id="__toolbar1">
+					                <content>
+					                    <Text text="Planning attributes" id="__text13"/>
+					                </content>
+					            </OverflowToolbar>
+					        </headerToolbar></Table>
+					    <Table noDataText="Drop column list items here and columns in the area above" id="__table1">
+					        <items>
+					            <ColumnListItem id="__item1">
+					                <cells>
+					                    <Text text="{period}" id="__text9"/>
+					                    <Text text="{effort}" id="__text10"/>
+					                </cells>
+					            </ColumnListItem>
+					            </items>
+					        <columns>
+					            <Column id="__column3">
+					                <header>
+					                    <Label text="Month" id="__label3"/>
+					                </header>
+					            </Column>
+					            <Column id="__column4">
+					                <header>
+					                    <Label text="Effort" id="__label4"/>
+					                </header>
+					            </Column></columns>
+					        <headerToolbar>
+					            <Toolbar width="100%" id="__toolbar3">
+					                <content>
+					                    <Text text="Effort Planning" id="__text17"/>
+					                </content>
+					            </Toolbar>
+					        </headerToolbar></Table>
+					</content>
+					</IconTabFilter>
+					<IconTabFilter text="Resources" icon="sap-icon://task" id="__filter0">
+					    <content>
+					        <Table noDataText="Drop column list items here and columns in the area above" id="__table2" items="{VResources}">
+					            <items>
+					                <ColumnListItem id="__item2">
+					                    <cells>
+					                        <Text text="{description}" id="__text11"/>
+					                        <ObjectNumber number="{cost_rate_tc}" unit="{currency_tc}" id="__number0"/>
+					                        <ObjectNumber number="{cost_rate_pc}" unit="{currency}" id="__number1"/></cells>
+					                </ColumnListItem></items>
+					            <columns>
+					                <Column id="__column5">
+					                    <header>
+					                        <Label text="Name" id="__label5"/>
+					                    </header>
+					                </Column>
+					                <Column id="__column6">
+					                    <header>
+					                        <Label text="Cost Rate TC" id="__label6"/>
+		                               </header>
+					                </Column>
+					                <Column id="__column7">
+					                    <header>
+					                        <Label text="Cost Rate PC" id="__label7"/>
+					                    </header>
+					                </Column></columns></Table>
+					    </content>
+					</IconTabFilter>
+					<IconTabFilter text="Revenue Rates" icon="sap-icon://money-bills" id="__filter1">
+					    <content>
+					        <Table noDataText="Drop column list items here and columns in the area above" id="__table3" items ="{ path :'VRevRates'  }">
+					            <items>
+					                <ColumnListItem id="__item3">
+					                    <cells>
+					                        <Text text="{description}" id="__text18"/>
+					                        <ObjectNumber number="{list_rate_tc}" unit="{currency_tc}" id="__number2"/>
+					                        <ObjectNumber number="{list_rate_pc}" it="{currency}" id="__number3"/></cells>
+					                </ColumnListItem></items>
+					            <columns>
+					                <Column id="__column8">
+					                    <header>
+					                        <Label text="Name" id="__label8"/>
+					                    </header>
+					                </Column>
+					                <Column id="__column9">
+					                    <header>
+					                        <Label text="List rate TC" id="__label9"/>
+					                    </header>
+					                </Column>
+					                <Column id="__column10">
+					                    <header>
+					                        <Label text="List Rate PC" id="__label10"/>
+					                    </header>
+					                </Column></columns></Table>
+					    </content>
+					</IconTabFilter>
+					
+					
+				</items>
+			</IconTabBar>
+
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{detailView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+
+	</semantic:DetailPage>
+
+</mvc:View>

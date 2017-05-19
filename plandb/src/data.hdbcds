@@ -1,0 +1,109 @@
+namespace "plan_it"."plandb";
+
+context data{
+ 
+/*@@layout{"layoutInfo":{"x":-1525,"y":-699.5}}*/
+type BusinessKey : Integer;
+
+/*@@layout{"layoutInfo":{"x":-1267,"y":-699.5}}*/
+type Description : String(80);
+
+/*@@layout{"layoutInfo":{"x":-1016,"y":-699.5}}*/
+type Currency : String(3);
+
+/*@@layout{"layoutInfo":{"x":-773,"y":-699.5}}*/
+type Amount : Decimal(17,2);
+
+/*@@layout{"layoutInfo":{"x":-514,"y":-699.5}}*/
+type Date : LocalDate;
+
+/*@@layout{"layoutInfo":{"x":-853,"y":-567.5}}*/
+entity Version{
+ key id : BusinessKey;
+description : Description;
+startDate : Date;
+endDate : Date;
+currency : Currency;
+};
+
+/*@@layout{"layoutInfo":{"x":-1415,"y":-343.5}}*/
+entity Resource{
+ key id : BusinessKey;
+description : Description;
+cost_rate_tc : Amount;
+currency_tc : Currency;
+version : Association[1..1] to Version {id};
+};
+
+/*@@layout{"layoutInfo":{"x":-239,"y":-312.5}}*/
+entity RevenueRate{
+ key id : BusinessKey;
+description : Description;
+list_rate_tc : Amount;
+currency_tc : Currency;
+version : Association[1..1] to Version;
+};
+
+/*@@layout{"layoutInfo":{"x":-1525,"y":-622.5}}*/
+type Calc_type_wr : String(3);
+
+/*@@layout{"layoutInfo":{"x":-1297,"y":-622.5}}*/
+type Calc_type_tr : String(80);
+
+/*@@layout{"layoutInfo":{"x":-835,"y":-282.5}}*/
+entity PlanStructure{
+ key id : BusinessKey;
+description : Description;
+wr_calc_type : Calc_type_wr;
+tr_calc_type : Calc_type_tr;
+fpp_amount : Amount;
+contract_currency : Currency;
+version : Association[1..1] to Version;
+};
+
+/*@@layout{"layoutInfo":{"x":16,"y":-76.5}}*/
+entity TravelVariant{
+ key id : BusinessKey;
+description : Description;
+calc_type_tv : Calc_type_tv;
+work_exp_perc : Percentage;
+tripCostDay : Amount;
+trEffExpDay : Amount;
+exp_currency : Currency;
+};
+
+/*@@layout{"layoutInfo":{"x":-1065,"y":-622.5}}*/
+type Calc_type_tv : String(1);
+
+/*@@layout{"layoutInfo":{"x":-790,"y":-630.5}}*/
+type Percentage : Decimal(10,2);
+
+/*@@layout{"layoutInfo":{"x":-1138,"y":-68.5}}*/
+entity PlanAttributes{
+ key ID : BusinessKey;
+resource : Association[0..1] to Resource;
+str_elemet : Association[0..1] to PlanStructure;
+revenue_rate : Association[0..1] to RevenueRate;
+travel_variant : Association[0..1] to TravelVariant;
+version : Association[0..1] to Version;
+};
+
+/*@@layout{"layoutInfo":{"x":-1666,"y":-62.5}}*/
+entity EffortPlanning{
+ key period : String(6);
+key attributeId : Association[0..1] to PlanAttributes ;
+effort : Effort;
+Unit : Effort;
+};
+
+/*@@layout{"layoutInfo":{"x":-525,"y":-630.5}}*/
+type Effort : Decimal(10,3);
+
+/*@@layout{"layoutInfo":{"x":-233,"y":-638.5}}*/
+type Unit : String(3);
+
+
+
+
+
+};  

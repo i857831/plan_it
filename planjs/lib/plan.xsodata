@@ -1,0 +1,24 @@
+service {
+
+  "plan_it.plandb::data.Version" as "Version"
+  navigates( "V_PlanAttributes" as "PlAttr", "V_Resources" as "VResources","V_RevRates" as "VRevRates");
+  
+  "plan_it.plandb.calc_views::PlanAttributes" as "PlanAttributes" keys ("ID")
+  navigates( "PlAttr_Effort" as "Effort" );
+  "plan_it.plandb::data.EffortPlanning" as "EffortPlanning";
+  "plan_it.plandb.calc_views::test_conversion" as "ResourceConv" keys ("id");
+  "plan_it.plandb.calc_views::RevenueRateConv" as "RevenueRateConv" keys ("id");
+  
+  association "V_PlanAttributes" principal "Version"("id") 
+  multiplicity "1" dependent "PlanAttributes"("version_id") multiplicity "*"; 
+  
+  association "PlAttr_Effort" principal "PlanAttributes"("ID") 
+  multiplicity "1" dependent "EffortPlanning"("attributeId.ID") multiplicity "*"; 
+  
+  association "V_Resources" principal "Version"("id") 
+  multiplicity "1" dependent "ResourceConv"("version_id") multiplicity "*"; 
+  
+  association "V_RevRates" principal "Version"("id") 
+  multiplicity "1" dependent "RevenueRateConv"("id") multiplicity "*"; 
+
+}
