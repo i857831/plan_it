@@ -138,11 +138,31 @@ type Unit : String(3);
         trav_exp_reimb,
         trav_eff_reimb,
         tr_eff_lump_sum,
+<<<<<<< HEAD
         tr_exp_lump_sum, version.{ 
 	startDate as start_date, 
 	currency as plan_currency
 	}
             };
+=======
+        tr_exp_lump_sum,
+        case
+            str_element.tr_calc_type when 'A' then(TravelVariant.tr_exp_lump_sum)
+            else 0
+        end                   as tr_exp_lump_sum_pc,
+        case
+            str_element.tr_calc_type when 'A' then(TravelVariant.tr_eff_lump_sum)
+            else 0
+        end                   as tr_eff_lump_sum_pc,
+        case
+            str_element.tr_calc_type when 'A' then((TravelVariant.wd_trip +TravelVariant.add_wd_trip) * (TravelVariant.acc_day_tc)) / wd_trip
+            else 0
+        end                   as tr_exp_day_tc, version.{ 
+	startDate as start_date, 
+	currency as plan_currency
+	}
+    };
+>>>>>>> refs/remotes/origin/master
     
     view PlAttrDetail as
     select from PlanAttributes
