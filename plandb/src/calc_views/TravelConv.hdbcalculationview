@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="plan_it.plandb.calc_views::TravelConv" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="TravelConv"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="plan_it.plandb::data.TravelVariantCalc">
+    <resourceUri>plan_it.plandb::data.TravelVariantCalc</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="plan_it.plandb::data.TravelVariantCalc">
+  <attributes>
+    <attribute id="tr_cost_currency" order="8" semanticType="currencyCode" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="tr_cost_currency"/>
+      <keyMapping columnObjectName="data.TravelVariantCalc" columnName="tr_cost_currency"/>
+    </attribute>
+    <attribute id="contract_currency" order="10" semanticType="currencyCode" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="contract_currency"/>
+      <keyMapping columnObjectName="data.TravelVariantCalc" columnName="contract_currency"/>
+    </attribute>
+    <attribute id="id" order="11" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="id"/>
+      <keyMapping columnObjectName="data.TravelVariantCalc" columnName="id"/>
+    </attribute>
+  
+    <attribute id="start_date" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="start_date"/>
+  
+      <keyMapping columnObjectName="data.TravelVariantCalc" columnName="start_date"/>
+  
+    </attribute>
+    <attribute id="plan_currency" order="13" semanticType="currencyCode" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="plan_currency"/>
+      <keyMapping columnObjectName="data.TravelVariantCalc" columnName="plan_currency"/>
+    </attribute>
+    <attribute id="tr_calc_type" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="tr_calc_type"/>
+      <keyMapping columnObjectName="data.TravelVariantCalc" columnName="tr_calc_type"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="tr_eff_lump_sum" order="4" aggregationType="sum" measureType="simple" hidden="true">
+      <descriptions defaultDescription="tr_eff_lump_sum"/>
+      <measureMapping schemaName="PLAN_IT_2" columnObjectName="data.TravelVariantCalc" columnName="tr_eff_lump_sum"/>
+    </measure>
+    <measure id="tr_exp_lump_sum" order="5" aggregationType="sum" measureType="simple" hidden="true">
+      <descriptions defaultDescription="tr_exp_lump_sum"/>
+      <measureMapping schemaName="PLAN_IT_2" columnObjectName="data.TravelVariantCalc" columnName="tr_exp_lump_sum"/>
+    </measure>
+    <measure id="wd_trip" order="6" aggregationType="sum" measureType="simple" hidden="true">
+      <descriptions defaultDescription="wd_trip"/>
+      <measureMapping schemaName="PLAN_IT_2" columnObjectName="data.TravelVariantCalc" columnName="wd_trip"/>
+    </measure>
+    <measure id="add_wd_trip" order="7" aggregationType="sum" measureType="simple" hidden="true">
+      <descriptions defaultDescription="add_wd_trip"/>
+      <measureMapping columnObjectName="data.TravelVariantCalc" columnName="add_wd_trip"/>
+    </measure>
+    <measure id="acc_day_tc" order="9" aggregationType="sum" measureType="simple" hidden="true">
+      <descriptions defaultDescription="acc_day_tc"/>
+      <measureMapping schemaName="PLAN_IT_2" columnObjectName="data.TravelVariantCalc" columnName="acc_day_tc"/>
+    </measure></baseMeasures>
+  <calculatedMeasures>
+    <measure id="tr_exp_lump_sum_pc" order="1" semanticType="amount" aggregationType="sum" measureType="amount" datatype="REAL" expressionLanguage="COLUMN_ENGINE">
+      <descriptions defaultDescription="tr_exp_lump_sum_pc"/>
+      <unitCurrencyAttribute attributeName="plan_currency"/>
+      <currencyConversion generateOutputUnitCurrencyAttribute="false" convert="true">
+        <client>
+          <value>000</value>
+        </client>
+        <currencyConversionTables rates="plan_it.plandb::conv.TCURR" configuration="plan_it.plandb::conv.TCURV" prefactors="plan_it.plandb::conv.TCURF" notations="plan_it.plandb::conv.TCURN" precisions="plan_it.plandb::conv.TCURX"/>
+        <sourceCurrency>
+          <attribute attributeName="contract_currency"/>
+        </sourceCurrency>
+        <erpDecimalShift>true</erpDecimalShift>
+        <targetCurrency>
+          <attribute attributeName="plan_currency"/>
+        </targetCurrency>
+        <referenceDate>
+          <attribute attributeName="start_date"/>
+        </referenceDate>
+        <exchangeRateType>M</exchangeRateType>
+      </currencyConversion>
+      <formula>if(
+            &quot;tr_calc_type&quot; = 'A' ,&quot;tr_exp_lump_sum&quot;, 0)
+         
+        
+</formula>
+      
+      
+      </measure>
+    <measure id="tr_eff_lump_sum_pc" order="2" semanticType="amount" aggregationType="sum" measureType="amount" datatype="REAL" expressionLanguage="COLUMN_ENGINE">
+      <descriptions defaultDescription="tr_eff_lump_sum_pc"/>
+      <unitCurrencyAttribute attributeName="plan_currency"/>
+      <currencyConversion generateOutputUnitCurrencyAttribute="false" convert="true">
+        <client>
+          <value>000</value>
+        </client>
+        <currencyConversionTables rates="plan_it.plandb::conv.TCURR" configuration="plan_it.plandb::conv.TCURV" prefactors="plan_it.plandb::conv.TCURF" notations="plan_it.plandb::conv.TCURN" precisions="plan_it.plandb::conv.TCURX"/>
+        <outputDataType datatype="REAL"/>
+        <sourceCurrency>
+          <attribute attributeName="contract_currency"/>
+        </sourceCurrency>
+        <erpDecimalShift>true</erpDecimalShift>
+        <targetCurrency>
+          <attribute attributeName="plan_currency"/>
+        </targetCurrency>
+        <referenceDate>
+          <attribute attributeName="start_date"/>
+        </referenceDate>
+        <exchangeRateType>M</exchangeRateType>
+      </currencyConversion>
+      <formula>if(&quot;tr_calc_type&quot; = 'A' ,&quot;tr_exp_lump_sum&quot;, 0)</formula>
+      
+      
+      </measure>
+    <measure id="tr_exp_day_tc" order="3" semanticType="amount" aggregationType="sum" measureType="amount" datatype="REAL" expressionLanguage="COLUMN_ENGINE">
+      <descriptions defaultDescription="tr_exp_day_tc"/>
+      <unitCurrencyAttribute attributeName="plan_currency"/>
+      <currencyConversion generateOutputUnitCurrencyAttribute="false" convert="true">
+        <client>
+          <value>000</value>
+        </client>
+        <currencyConversionTables rates="plan_it.plandb::conv.TCURR" configuration="plan_it.plandb::conv.TCURV" prefactors="plan_it.plandb::conv.TCURF" notations="plan_it.plandb::conv.TCURN" precisions="plan_it.plandb::conv.TCURX"/>
+        <outputDataType datatype="REAL"/>
+        <sourceCurrency>
+          <attribute attributeName="tr_cost_currency"/>
+        </sourceCurrency>
+        <erpDecimalShift>true</erpDecimalShift>
+        <targetCurrency>
+          <attribute attributeName="plan_currency"/>
+        </targetCurrency>
+        <referenceDate>
+          <attribute attributeName="start_date"/>
+        </referenceDate>
+        <exchangeRateType>M</exchangeRateType>
+      </currencyConversion>
+      <formula>if(&quot;tr_calc_type&quot; = 'A' ,(&quot;wd_trip&quot; +&quot;add_wd_trip&quot;) * &quot;acc_day_tc&quot; / &quot;wd_trip&quot;, 0)</formula>
+      
+      
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario> 
