@@ -126,6 +126,7 @@
 						"object"
 					]
 				}
+				
 			],
 			"targets": {
 				"master": {
@@ -151,6 +152,8 @@
 					"viewName": "NotFound",
 					"viewId": "notFound"
 				}
+				
+				
 			}
 		}
 	}

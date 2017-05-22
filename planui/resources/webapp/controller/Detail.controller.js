@@ -2,13 +2,15 @@
 sap.ui.define([
 		"plan/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
-		"plan/model/formatter"
-	], function (BaseController, JSONModel, formatter) {
+		"plan/model/formatter",
+		"plan/model/dateFormatter"
+	], function (BaseController, JSONModel, formatter,dateFormatter) {
 		"use strict";
 
 		return BaseController.extend("plan.controller.Detail", {
 
 			formatter: formatter,
+			dateFormatter: dateFormatter,
 
 			/* =========================================================== */
 			/* lifecycle methods                                           */
@@ -147,12 +149,101 @@ sap.ui.define([
 			},
 			
 			_onPlAttrSelected : function(oEvent){
-				
+			    var that = this;
 				var object = oEvent.getSource().getSelectedItem().getBindingContext().getObject();
 				var oTable =  this.getView().byId("__table1");
 				
+				var oTemplate = new sap.m.ColumnListItem({
+				cells: [
+			    new sap.m.Text({
+			    	text: "{period}"
+			    }),
+				new sap.m.Input({
+						value: "{effort}",
+						submit: function(Event){
+							that._onEffortChange(Event);                        
+						}
+					})
+				]
+			});
+			
+			oTable.removeAllItems();
+			//oTable.addItem(oTemplate);                     
+			    var sPath = "PlAttr("+object.ID+")/Effort";
+				oTable.bindItems({
+				path: sPath,
+				template: oTemplate });
+		
+			},
+			
+			_onPlanDataSave : function( ){
+			var batchChanges = [];
+		    var batchModel = new sap.ui.model.odata.ODataModel("/plan.xsodata/", true);
+		    
+			var items = this.getView().byId('__table1').getItems();
+			
+    		//Loop through the items, updating each
+        	var row;
+        	var itemObject;
+        	var context;
+        	for(var i = 0; i < items.length; i++){
+            	row = items[i];
+            	context = row.getBindingContext();
+            	itemObject = context.getObject();
+            	itemObject.effort = 40;
+                //Then execute the v2 model's Update function
+                batchModel.update("/EffortPlanning(1)",itemObject,
+                {
+       async : false,
+       success : function(oData, response) {
+         jQuery.sap.require("sap.m.MessageBox");
+         sap.m.MessageBox.alert("Updated successfully"); 
+       },
+       error : function(oError) {
+          jQuery.sap.require("sap.m.MessageBox");
+         sap.m.MessageBox.alert("Error during update");  
+  
+  }});                           
+            batchChanges.push(batchModel.createBatchOperation("/EffortPlanning(1)", "MERGE", itemObject));
+                
+        		}
+            batchModel.addBatchChangeOperations(batchChanges);
+        	batchModel.submitChanges( function(data, response, errorResponse) {
+            
+            //Call the User Service (GET) and populate the table.
+            
+           sap.ui.commons.MessageBox.alert.alert("test1");
+            
+        }, function(data) {
+        	
+        	sap.ui.commons.MessageBox.alert.alert("test2");
+            
+        } );
 				
-                oTable.bindItems({path: "PlAttr(1)/Effort"});
+			},
+			
+			_onEffortChange: function (oEvent) {
+				var oModel = this.getView( ).getModel( );
+				var newEffort = oEvent.getParameter("value");
+				var updateModel = new sap.ui.model.odata.ODataModel("/plan.xsodata/", true);
+				var oContext = oEvent.getSource().getParent().getBindingContext();
+				var itemObject = oContext.getObject();
+				itemObject.effort = newEffort;
+				
+                updateModel.update(oContext.sPath,itemObject,
+                {
+                async : false,
+                success : function(oData, response) {
+                jQuery.sap.require("sap.m.MessageBox");
+                sap.m.MessageBox.alert("Updated successfully");
+                oModel.refresh();
+    			},
+    			error : function(oError) {
+        	    jQuery.sap.require("sap.m.MessageBox");
+                sap.m.MessageBox.alert("Error during update");  
+  
+  }});                           
+				
 				
 			},
 

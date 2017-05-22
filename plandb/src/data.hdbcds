@@ -1,5 +1,6 @@
 namespace "plan_it"."plandb";
 
+
 context data{
  
 /*@@layout{"layoutInfo":{"x":-1525,"y":-699.5}}*/
@@ -64,12 +65,23 @@ version : Association[1..1] to Version;
 /*@@layout{"layoutInfo":{"x":16,"y":-76.5}}*/
 entity TravelVariant{
  key id : BusinessKey;
-description : Description;
+trav_var_name : Description;
 calc_type_tv : Calc_type_tv;
-work_exp_perc : Percentage;
-tripCostDay : Amount;
-trEffExpDay : Amount;
-exp_currency : Currency;
+version : Association[0..1] to Version;
+work_cost_perc : Percentage;
+wd_trip : Decimal(17,1);
+add_wd_trip : String(10);
+total_tr_eff : Amount;
+tr_cost_currency : Currency;
+transp_trip_tc : Amount;
+acc_day_tc : Amount;
+other_day_tc : Amount;
+trav_exp_reimb : Percentage;
+trav_eff_reimb : Percentage;
+tr_eff_lump_sum : Amount;
+tr_exp_lump_sum : Amount;
+str_element : Association[0..1] to PlanStructure;
+
 };
 
 /*@@layout{"layoutInfo":{"x":-1065,"y":-622.5}}*/
@@ -86,14 +98,16 @@ str_elemet : Association[0..1] to PlanStructure;
 revenue_rate : Association[0..1] to RevenueRate;
 travel_variant : Association[0..1] to TravelVariant;
 version : Association[0..1] to Version;
+remote_percent : Percentage;
 };
 
 /*@@layout{"layoutInfo":{"x":-1666,"y":-62.5}}*/
 entity EffortPlanning{
- key period : String(6);
-key attributeId : Association[0..1] to PlanAttributes ;
+ period : String(6);
+attributeId : Association[0..1] to PlanAttributes ;
 effort : Effort;
-Unit : Effort;
+unit : Unit;
+key id : BusinessKey;
 };
 
 /*@@layout{"layoutInfo":{"x":-525,"y":-630.5}}*/
@@ -102,8 +116,69 @@ type Effort : Decimal(10,3);
 /*@@layout{"layoutInfo":{"x":-233,"y":-638.5}}*/
 type Unit : String(3);
 
+    view TravelVariantCalc as
+    select from TravelVariant
+    {
+        str_element.{
+            tr_calc_type,
+            description       as structure_element,
+            contract_currency
+        },
+        id,
+        trav_var_name,
+        calc_type_tv,
+        work_cost_perc,
+        wd_trip,
+        add_wd_trip,
+        total_tr_eff,
+        tr_cost_currency,
+        transp_trip_tc,
+        acc_day_tc,
+        other_day_tc,
+        trav_exp_reimb,
+        trav_eff_reimb,
+        tr_eff_lump_sum,
+        tr_exp_lump_sum,
+        case
+            str_element.tr_calc_type when 'A' then(TravelVariant.tr_exp_lump_sum)
+            else 0
+        end                   as tr_exp_lump_sum_pc,
+        case
+            str_element.tr_calc_type when 'A' then(TravelVariant.tr_eff_lump_sum)
+            else 0
+        end                   as tr_eff_lump_sum_pc,
+        case
+            str_element.tr_calc_type when 'A' then((TravelVariant.wd_trip +TravelVariant.add_wd_trip) * (TravelVariant.acc_day_tc)) / wd_trip
+            else 0
+        end                   as tr_exp_day_tc
+    };
+    
+    view PlAttrDetail as
+    select from PlanAttributes
+    {
+        ID,
+        resource.{
+            description   as resource_name
+        },
+        revenue_rate.{
+            description   as rev_rate_name
+        },
+        travel_variant.{
+            trav_var_name as trav_var_name
+        },
+        remote_percent,
+        str_elemet.{
+            description   as str_elem_name
+        },
+        version.id as version_id
+    };
+    
+    /*@@layout{"layoutInfo":{"inner":{"unconnected":[],"connected":{"type":"SimpleDS","id":"\"plan_it\".\"plandb\"::data.PlAttrWeHelp.PlanAttributes","x":-293,"y":-86}}}}*/
+view PlAttrWeHelp as
+    select from (PlanAttributes Inner join EffortPlanning on PlanAttributes.ID=EffortPlanning.attributeId.ID)
+    {PlanAttributes.ID, PlanAttributes.resource.id as resource_id,
+    PlanAttributes.str_elemet.id as str_element,
+    PlanAttributes.str_elemet.description as str_el_descr,
+    EffortPlanning.period, EffortPlanning.effort, EffortPlanning.unit, EffortPlanning.id as id_1};
 
-
-
-
-};  
+};   

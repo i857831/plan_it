@@ -24,11 +24,13 @@
 		},
 	"column_mappings": {
 	    "id": 1,
-		"description": 2,
+		"description": 2 ,
 		"wr_calc_type": 3,
 		"tr_calc_type": 4,
 		"fpp_amount": 5,
-		"contract_currency: 6,
+		"contract_currency": 6,
 		"version.id": 7
 				}
-	}]}
+	}
+	]
+	}

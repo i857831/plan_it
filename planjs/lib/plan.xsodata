@@ -1,13 +1,18 @@
 service {
 
   "plan_it.plandb::data.Version" as "Version"
-  navigates( "V_PlanAttributes" as "PlAttr", "V_Resources" as "VResources","V_RevRates" as "VRevRates");
+  navigates( "V_PlanAttributes" as "PlAttr", "V_Resources" as "VResources","V_RevRates" 
+  as "VRevRates","V_PlanStr" as "PlanStr", "V_Wexp" as "WorkExp");
   
-  "plan_it.plandb.calc_views::PlanAttributes" as "PlanAttributes" keys ("ID")
+  "plan_it.plandb::data.PlAttrDetail" as "PlanAttributes" keys ("ID")
   navigates( "PlAttr_Effort" as "Effort" );
   "plan_it.plandb::data.EffortPlanning" as "EffortPlanning";
-  "plan_it.plandb.calc_views::test_conversion" as "ResourceConv" keys ("id");
-  "plan_it.plandb.calc_views::RevenueRateConv" as "RevenueRateConv" keys ("id");
+  "plan_it.plandb.calc_views::RecourceConv" as "ResourceConv" keys ("res_id");
+  "plan_it.plandb.calc_views::StrElementWe" as "StrElementWe"  keys generate local "id";
+  "plan_it.plandb::data.Resource" as "Resource" navigates( "Res_Conv" as "ResConv") ;
+  "plan_it.plandb.calc_views::RevRateConv" as "RevenueRateConv" keys ("rev_rate_id");
+  "plan_it.plandb::data.RevenueRate" as "RevenueRate" navigates( "RevRate_Conv" as "RevRateConv") ;
+  "plan_it.plandb::data.PlanStructure" as "PlanStructure";
   
   association "V_PlanAttributes" principal "Version"("id") 
   multiplicity "1" dependent "PlanAttributes"("version_id") multiplicity "*"; 
@@ -16,9 +21,21 @@ service {
   multiplicity "1" dependent "EffortPlanning"("attributeId.ID") multiplicity "*"; 
   
   association "V_Resources" principal "Version"("id") 
-  multiplicity "1" dependent "ResourceConv"("version_id") multiplicity "*"; 
+  multiplicity "1" dependent "Resource"("version.id") multiplicity "*"; 
+  
+  association "Res_Conv" principal "Resource"("id") 
+  multiplicity "1" dependent "ResourceConv"("res_id") multiplicity "1"; 
   
   association "V_RevRates" principal "Version"("id") 
-  multiplicity "1" dependent "RevenueRateConv"("id") multiplicity "*"; 
+  multiplicity "1" dependent "RevenueRate"("version.id") multiplicity "*"; 
+  
+  association "RevRate_Conv" principal "RevenueRate"("id") 
+  multiplicity "1" dependent "RevenueRateConv"("rev_rate_id") multiplicity "1"; 
+  
+  association "V_PlanStr" principal "Version"("id") 
+  multiplicity "1" dependent "PlanStructure"("version.id") multiplicity "*"; 
+  
+  association "V_Wexp" principal "Version"("id") 
+  multiplicity "1" dependent "StrElementWe"("version_id") multiplicity "*"; 
 
 }

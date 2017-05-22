@@ -7,15 +7,51 @@
 			</ObjectHeader>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
+					<IconTabFilter xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" text="Version details" icon="sap-icon://detail-view" id="__filter3">
+					<content>
+					    <sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form0">
+					        <sap.ui.layout.form:formContainers>
+					            <sap.ui.layout.form:FormContainer id="__container0">
+					                <sap.ui.layout.form:formElements>
+					                    <sap.ui.layout.form:FormElement xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:sap.ui.layout.form="sap.ui.layout.form" label="Description" id="__element2">
+					                        <sap.ui.layout.form:fields>
+					                            <Text text="{description}" id="__text24"/>
+					                        </sap.ui.layout.form:fields>
+					                    </sap.ui.layout.form:FormElement>
+					                    <sap.ui.layout.form:FormElement label="Start Date" id="__element0">
+					                        <sap.ui.layout.form:fields>
+					                            <Text text="{path: 'startDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.YYYY'} }" id="__text12"/>
+					                        </sap.ui.layout.form:fields>
+					                    </sap.ui.layout.form:FormElement>
+					                    <sap.ui.layout.form:FormElement label="End Date" id="__element1">
+					                    <sap.ui.layout.form:fields>
+					                        <Text text="{path: 'endDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.YYYY'}}" id="__text14"/>
+					                    </sap.ui.layout.form:fields>
+					                    </sap.ui.layout.form:FormElement>
+					                    <sap.ui.layout.form:FormElement label="Plan currency" id="__element3">
+					                    <sap.ui.layout.form:fields>
+					                        <Text text="{currency}" id="__text26"/>
+					                    </sap.ui.layout.form:fields>
+					                    </sap.ui.layout.form:FormElement>
+					                </sap.ui.layout.form:formElements>
+					            </sap.ui.layout.form:FormContainer>
+					        </sap.ui.layout.form:formContainers>
+					        <sap.ui.layout.form:layout>
+					            <sap.ui.layout.form:ResponsiveGridLayout id="__layout0"/>
+					        </sap.ui.layout.form:layout></sap.ui.layout.form:Form>
+					</content>
+					</IconTabFilter>
 					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://simple-payment" tooltip="{i18n>detailIconTabBarInfo}" key="Planning" text="Planning">
 					<content>
-					    <Table noDataText="Drop column list items here and columns in the area above" id="__table0" items="{ path: 'PlAttr'}" mode="SingleSelectLeft" selectionChange="_onPlAttrSelected">
+					    <Table noDataText="Drop column list items here and columns in the area above" id="__table0" items="{PlAttr}" selectionChange="_onPlAttrSelected" mode="SingleSelectMaster">
 					        <items>
 					            <ColumnListItem id="__item0">
 					                <cells>
-					                    <Text text="{structure_element}" id="__text6"/>
+					                    <Text text="{str_elem_name}" id="__text6"/>
 					                    <Text text="{resource_name}" id="__text7"/>
-					                    <Text text="{rev_rate_name}" id="__text8"/></cells>
+					                    <Text text="{rev_rate_name}" id="__text8"/>
+					                    <Text text="{trav_var_name}" id="__text27"/></cells>
+					                   
 					            </ColumnListItem></items>
 					        <columns>
 					            <Column id="__column0">
@@ -32,6 +68,11 @@
 					                <header>
 					                    <Label text="Revenue Rate" id="__label2"/>
 					                </header>
+					            </Column>
+					            <Column id="__column18">
+					                <header>
+					                    <Text text="Travel Variant" id="__text30"/>
+					                </header>
 					            </Column></columns>
 					        <headerToolbar>
 					            <OverflowToolbar width="100%" id="__toolbar1">
@@ -43,10 +84,10 @@
 					    <Table noDataText="Drop column list items here and columns in the area above" id="__table1">
 					        <items>
 					            <ColumnListItem id="__item1">
-					                <cells>
-					                    <Text text="{period}" id="__text9"/>
-					                    <Text text="{effort}" id="__text10"/>
-					                </cells>
+					            <cells>
+					                <Text text="{period}" id="__text9"/>
+					                <Text text="{effort}" id="__text10"/>
+					            </cells>
 					            </ColumnListItem>
 					            </items>
 					        <columns>
@@ -67,17 +108,48 @@
 					                </content>
 					            </Toolbar>
 					        </headerToolbar></Table>
+					    <Table noDataText="Drop column list items here and columns in the area above" id="__table5" items="{WorkExp}">
+					        <items>
+					            <ColumnListItem id="__item5">
+					                <cells>
+					                    <Text text="{str_el_descr}" id="__text28"/>
+					                    <Text text="{period}" id="__text29"/>
+					                    <ObjectNumber number="{WorkExpPC}" unit="{plan_currency}" id="__number5"/></cells>
+					            </ColumnListItem></items>
+					        <columns>
+					            <Column id="__column15">
+					                <header>
+					                    <Label text="Structure element" id="__label14"/>
+					                </header>
+					            </Column>
+					            <Column id="__column16">
+					                <header>
+					                    <Label text="Period" id="__label15"/>
+					                </header>
+					            </Column>
+					            <Column id="__column17">
+					                <header>
+					                    <Label text="Work Expense" id="__label16"/>
+					                </header>
+					            </Column></columns>
+					        <headerToolbar>
+					            <Toolbar width="100%" id="__toolbar2">
+					            <content>
+					                <Text text="Work Expenses" id="__text33"/>
+					            </content>
+					            </Toolbar>
+					        </headerToolbar></Table>
 					</content>
 					</IconTabFilter>
-					<IconTabFilter text="Resources" icon="sap-icon://task" id="__filter0">
+							<IconTabFilter text="Resources" icon="sap-icon://employee" id="__filter0">
 					    <content>
-					        <Table noDataText="Drop column list items here and columns in the area above" id="__table2" items="{VResources}">
+					        <Table noDataText="Drop column list items here and columns in the area above" id="__table2" items="{path: 'VResources', parameters: {expand : 'ResConv'} }">
 					            <items>
 					                <ColumnListItem id="__item2">
 					                    <cells>
 					                        <Text text="{description}" id="__text11"/>
 					                        <ObjectNumber number="{cost_rate_tc}" unit="{currency_tc}" id="__number0"/>
-					                        <ObjectNumber number="{cost_rate_pc}" unit="{currency}" id="__number1"/></cells>
+					                        <ObjectNumber number="{ResConv/cost_rate_pc}" unit="{ResConv/currency_pc}" id="__number1"/></cells>
 					                </ColumnListItem></items>
 					            <columns>
 					                <Column id="__column5">
@@ -97,15 +169,16 @@
 					                </Column></columns></Table>
 					    </content>
 					</IconTabFilter>
+			
 					<IconTabFilter text="Revenue Rates" icon="sap-icon://money-bills" id="__filter1">
 					    <content>
-					        <Table noDataText="Drop column list items here and columns in the area above" id="__table3" items ="{ path :'VRevRates'  }">
+					        <Table noDataText="Drop column list items here and columns in the area above" id="__table3" items="{path: 'VRevRates', parameters: {expand : 'RevRateConv'} }">
 					            <items>
 					                <ColumnListItem id="__item3">
 					                    <cells>
 					                        <Text text="{description}" id="__text18"/>
 					                        <ObjectNumber number="{list_rate_tc}" unit="{currency_tc}" id="__number2"/>
-					                        <ObjectNumber number="{list_rate_pc}" it="{currency}" id="__number3"/></cells>
+					                        <ObjectNumber number="{RevRateConv/list_rate_pc}" unit="{RevRateConv/currency_pc}" id="__number3"/></cells>
 					                </ColumnListItem></items>
 					            <columns>
 					                <Column id="__column8">
@@ -124,6 +197,74 @@
 					                    </header>
 					                </Column></columns></Table>
 					    </content>
+					</IconTabFilter>
+			
+					<IconTabFilter text="Plan Structure" icon="sap-icon://sales-quote" id="__filter2">
+			
+					    <content>
+			
+					        <Table noDataText="Drop column list items here and columns in the area above" id="__table4" items="{path: 'PlanStr' }">
+			
+					            <items>
+			
+					                <ColumnListItem id="__item4">
+			
+					                    <cells>
+			
+					                        <Text text="{description}" id="__text19"/>
+			
+					                        <Text text="{wr_calc_type}" id="__text20"/>
+			
+					                        <Text text="{tr_calc_type}" id="__text21"/>
+			
+					                        <ObjectNumber number="{fpp_amount}" unit="{contract_currency}" id="__number4"/></cells>
+			
+					                </ColumnListItem></items>
+			
+					            <columns>
+			
+					                <Column id="__column11">
+			
+					                    <header>
+			
+					                        <Label text="Name" id="__label11"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column12">
+			
+					                    <header>
+			
+					                        <Label text="WR Calculation type" id="__label12"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column13">
+			
+					                    <header>
+			
+					                        <Label text="TR Calculation type" id="__label13"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column14">
+			
+					                    <header>
+			
+					                        <Text text="Contact amount" id="__text25"/>
+			
+					                    </header>
+			
+					                </Column></columns></Table>
+			
+					    </content>
+			
 					</IconTabFilter>
 					
 					
