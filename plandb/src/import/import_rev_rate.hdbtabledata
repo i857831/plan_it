@@ -18,14 +18,16 @@
 		"description",
 		"list_rate_tc",
 		"currency_tc",
-		"version.id" ]
+		"version.id",
+		"discount"]
 		},
 	"column_mappings": {
 	    "id": 1,
 		"description": 2 ,
 		"list_rate_tc": 3,
 		"currency_tc": 4,
-		"version.id": 5
+		"version.id": 5,
+		"discount": 6
 				}
 		
 	}

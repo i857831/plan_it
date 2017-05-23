@@ -7,7 +7,7 @@
 			</ObjectHeader>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
-					<IconTabFilter xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" text="Version details" icon="sap-icon://detail-view" id="__filter3">
+					<IconTabFilter xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" text="Version details" icon="sap-icon://detail-view" id="__filter3" design="Horizontal">
 					<content>
 					    <sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form0">
 					        <sap.ui.layout.form:formContainers>
@@ -41,7 +41,7 @@
 					        </sap.ui.layout.form:layout></sap.ui.layout.form:Form>
 					</content>
 					</IconTabFilter>
-					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://simple-payment" tooltip="{i18n>detailIconTabBarInfo}" key="Planning" text="Planning">
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://simple-payment" tooltip="{i18n>detailIconTabBarInfo}" key="Planning" text="Planning" design="Horizontal">
 					<content>
 					    <Table noDataText="Drop column list items here and columns in the area above" id="__table0" items="{PlAttr}" selectionChange="_onPlAttrSelected" mode="SingleSelectMaster">
 					        <items>
@@ -141,7 +141,7 @@
 					        </headerToolbar></Table>
 					</content>
 					</IconTabFilter>
-							<IconTabFilter text="Resources" icon="sap-icon://employee" id="__filter0">
+							<IconTabFilter text="Resources" icon="sap-icon://employee" id="__filter0" design="Horizontal">
 					    <content>
 					        <Table noDataText="Drop column list items here and columns in the area above" id="__table2" items="{path: 'VResources', parameters: {expand : 'ResConv'} }">
 					            <items>
@@ -170,7 +170,7 @@
 					    </content>
 					</IconTabFilter>
 			
-					<IconTabFilter text="Revenue Rates" icon="sap-icon://money-bills" id="__filter1">
+					<IconTabFilter text="Revenue Rates" icon="sap-icon://money-bills" id="__filter1" design="Horizontal">
 					    <content>
 					        <Table noDataText="Drop column list items here and columns in the area above" id="__table3" items="{path: 'VRevRates', parameters: {expand : 'RevRateConv'} }">
 					            <items>
@@ -178,7 +178,10 @@
 					                    <cells>
 					                        <Text text="{description}" id="__text18"/>
 					                        <ObjectNumber number="{list_rate_tc}" unit="{currency_tc}" id="__number2"/>
-					                        <ObjectNumber number="{RevRateConv/list_rate_pc}" unit="{RevRateConv/currency_pc}" id="__number3"/></cells>
+					                        <ObjectNumber number="{RevRateConv/list_rate_pc}" unit="{RevRateConv/currency_pc_ver_rev}" id="__number3"/>
+					                        <ObjectNumber number="{discount}" unit="%" id="__number6"/>
+					                        <ObjectNumber number="{RevRateConv/disc_rate_tc}" unit="{currency_tc}" id="__number7"/>
+					                        <ObjectNumber number="{RevRateConv/disc_rate_pc}" unit="{RevRateConv/currency_pc_ver_rev}" id="__number8"/></cells>
 					                </ColumnListItem></items>
 					            <columns>
 					                <Column id="__column8">
@@ -195,11 +198,26 @@
 					                    <header>
 					                        <Label text="List Rate PC" id="__label10"/>
 					                    </header>
+					                </Column>
+					                <Column id="__column19">
+					                    <header>
+					                        <Text text="Discount" id="__text31"/>
+					                    </header>
+					                </Column>
+					                <Column id="__column20">
+					                    <header>
+					                        <Text text="Discounted Rate TC" id="__text32"/>
+					                    </header>
+					                </Column>
+					                <Column id="__column21">
+					                    <header>
+					                        <Text text="Discounted Rate PC" id="__text34"/>
+					                    </header>
 					                </Column></columns></Table>
 					    </content>
 					</IconTabFilter>
 			
-					<IconTabFilter text="Plan Structure" icon="sap-icon://sales-quote" id="__filter2">
+					<IconTabFilter text="Plan Structure" icon="sap-icon://sales-quote" id="__filter2" design="Horizontal">
 			
 					    <content>
 			

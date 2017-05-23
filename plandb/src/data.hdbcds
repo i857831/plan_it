@@ -43,6 +43,7 @@ description : Description;
 list_rate_tc : Amount;
 currency_tc : Currency;
 version : Association[1..1] to Version;
+discount : Percentage;
 };
 
 /*@@layout{"layoutInfo":{"x":-1525,"y":-622.5}}*/
