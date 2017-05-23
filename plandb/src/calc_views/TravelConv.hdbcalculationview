@@ -39,7 +39,7 @@
       <descriptions defaultDescription="contract_currency"/>
       <keyMapping columnObjectName="data.TravelVariantCalc" columnName="contract_currency"/>
     </attribute>
-    <attribute id="id" order="11" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="id" order="11" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false" key="true">
       <descriptions defaultDescription="id"/>
       <keyMapping columnObjectName="data.TravelVariantCalc" columnName="id"/>
     </attribute>
@@ -76,7 +76,13 @@
   
     <attribute id="total_tr_eff" order="22" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="total_tr_eff"/>
+  
       <keyMapping columnObjectName="data.TravelVariantCalc" columnName="total_tr_eff"/>
+  
+    </attribute>
+    <attribute id="structure_element" order="23" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="structure_element"/>
+      <keyMapping columnObjectName="data.TravelVariantCalc" columnName="structure_element"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
@@ -95,6 +101,7 @@
           <attribute attributeName="contract_currency"/>
         </sourceCurrency>
         <erpDecimalShift>true</erpDecimalShift>
+        <round>true</round>
         <targetCurrency>
           <attribute attributeName="plan_currency"/>
         </targetCurrency>
