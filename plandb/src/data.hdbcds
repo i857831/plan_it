@@ -179,4 +179,32 @@ view PlAttrWeHelp as
     PlanAttributes.str_elemet.description as str_el_descr,
     EffortPlanning.period, EffortPlanning.effort, EffortPlanning.unit, EffortPlanning.id as id_1};
 
+/*@@layout{"layoutInfo":{"x":404,"y":-584.5,"inner":{"unconnected":[],"connected":{"type":"JoinDS","id":"join_1","left":{"type":"SimpleDS","id":"\"plan_it\".\"plandb\"::data.PlAttrWr.PlanAttributes","x":-600,"y":-149},"right":{"type":"SimpleDS","id":"\"plan_it\".\"plandb\"::data.PlAttrWr.EffortPlanning","x":-277,"y":-192}}}}}*/
+view PlAttrWr as
+	select from (PlanAttributes Inner join EffortPlanning on PlanAttributes.ID=EffortPlanning.attributeId.ID){PlanAttributes.revenue_rate.{ 
+	id as rev_rate_id
+	}, PlanAttributes.ID as pl_attr_id, EffortPlanning.period, EffortPlanning.effort, EffortPlanning.unit, EffortPlanning.id, PlanAttributes.version.{ 
+	id as version_id
+	}, PlanAttributes.str_elemet.{ 
+	id as str_elem_id, 
+	description as str_elem_descr, 
+	wr_calc_type as wr_calc_type
+	}} ;
+
+/*@@layout{"layoutInfo":{"x":798,"y":-588.5,"inner":{"unconnected":[],"connected":{"type":"JoinDS","id":"join_1","left":{"type":"SimpleDS","id":"\"plan_it\".\"plandb\"::data.PlAttrTravel.PlanAttributes","x":-765,"y":-222},"right":{"type":"SimpleDS","id":"\"plan_it\".\"plandb\"::data.PlAttrTravel.EffortPlanning","x":-344,"y":-256}}}}}*/
+view PlAttrTravel as
+	select from (PlanAttributes Inner join EffortPlanning on PlanAttributes.ID=EffortPlanning.attributeId.ID){PlanAttributes.ID, PlanAttributes.resource.{ 
+	id as resource_id
+	}, PlanAttributes.travel_variant.{ 
+	id as trave_variant, 
+	trav_var_name as trav_var_name, 
+	calc_type_tv as calc_type_tv
+	}, PlanAttributes.str_elemet.{ 
+	id as str_element_id, 
+	tr_calc_type as tr_calc_type, 
+	contract_currency as contract_currency
+	}, PlanAttributes.revenue_rate.{ 
+	id as rev_rate
+	}, PlanAttributes.remote_percent, EffortPlanning.effort, EffortPlanning.period, EffortPlanning.unit, EffortPlanning.id as effort_id};
+
 };    
