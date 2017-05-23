@@ -284,6 +284,190 @@
 					    </content>
 			
 					</IconTabFilter>
+			
+					<IconTabFilter text="Travel Variants" icon="sap-icon://travel-itinerary" id="__filter4" design="Horizontal">
+			
+					    <content>
+			<Label text="Travel Expenses Parameters:" width="100%" id="__label17"/>
+					        <Table noDataText="Drop column list items here and columns in the area above" id="__table6" items="{path: 'TrVar', parameters: {expand : 'TravelConv'}  }">
+			
+					            <items>
+			
+					                <ColumnListItem id="__item6">
+			
+					                    <cells>
+			
+					                        <Text text="{str_element.id}" id="__text35"/>
+			
+					                        <Text text="{trav_var_name}" id="__text36"/>
+			
+					                        <Text text="{calc_type_tv}" id="__text37"/>
+					                        
+					                        
+											<ObjectNumber number="{TravelConv/tr_exp_day_tc}" unit="{tr_cost_currency}" id="__number9"/>
+			
+					                        <ObjectNumber number="{TravelConv/tr_exp_day_pc}" unit="{TravelConv/plan_currency}" id="__number10"/>
+					                        
+					                         <ObjectNumber number="{work_cost_perc}" unit="%" id="__number11"/>
+			
+					                        <ObjectNumber number="{wd_trip}" unit="" id="__number12"/>
+			
+					                        <ObjectNumber number="{add_wd_trip}" unit="" id="__number13"/>
+			
+					                        <ObjectNumber number="{total_tr_eff}" unit="H" id="__number14"/>
+			
+					                        <ObjectNumber number="{TravelConv/tr_eff_day}" unit="H" id="__number15"/>
+			
+					                        <ObjectNumber number="{transp_trip_tc}" unit="{tr_cost_currency}" id="__number16"/>
+			
+					                        <ObjectNumber number="{acc_day_tc}" unit="{tr_cost_currency}" id="__number17"/>
+			
+					                        <ObjectNumber number="{other_day_tc}" unit="{tr_cost_currency}" id="__number18"/>
+					                        
+					                        
+					                         </cells>
+
+			
+					                </ColumnListItem></items>
+			
+					            <columns>
+					            						                <Column id="__column22">
+			
+					                    <header>
+			
+					                        <Text text="Structure element" id="__text44"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column23">
+			
+					                    <header>
+			
+					                        <Text text="Travel variant name" id="__text45"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column24">
+			
+					                    <header>
+			
+					                        <Text text="Calculation type " id="__text46"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column25">
+			
+					                    <header>
+			
+					                        <Text text="Travel exp. a WDay TC" id="__text41"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column26">
+			
+					                    <header>
+			
+					                        <Text text="Travel exp. a WDay PC" id="__text15"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column27">
+			
+					                    <header>
+			
+					                        <Text text="% of Work Cost" id="__text39"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column28">
+			
+					                    <header>
+			
+					                        <Text text="Work Days a Trip" id="__text40"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column29">
+			
+					                    <header>
+			
+					                        <Text text="Additional Trip Days" id="__text42"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column30">
+			
+					                    <header>
+			
+					                        <Text text="Total Travel Efforts" id="__text16"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column31">
+			
+					                    <header>
+			
+					                        <Text text="Trav.Effort a Day" id="__text22"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column32">
+			
+					                    <header>
+			
+					                        <Text text="Transportation per Trip" id="__text23"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column33">
+			
+					                    <header>
+			
+					                        <Text text="Accommodation per Trip" id="__text38"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+					                <Column id="__column34">
+			
+					                    <header>
+			
+					                        <Text text="Others per Day" id="__text43"/>
+			
+					                    </header>
+			
+					                </Column>
+			
+</columns></Table>
+			
+					        
+			
+					    </content>
+			
+					</IconTabFilter>
 					
 					
 				</items>

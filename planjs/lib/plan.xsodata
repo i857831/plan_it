@@ -2,7 +2,7 @@ service {
 
   "plan_it.plandb::data.Version" as "Version"
   navigates( "V_PlanAttributes" as "PlAttr", "V_Resources" as "VResources","V_RevRates" 
-  as "VRevRates","V_PlanStr" as "PlanStr", "V_Wexp" as "WorkExp");
+  as "VRevRates","V_PlanStr" as "PlanStr", "V_Wexp" as "WorkExp", "V_TravelVariant" as "TrVar");
   
   "plan_it.plandb::data.PlAttrDetail" as "PlanAttributes" keys ("ID")
   navigates( "PlAttr_Effort" as "Effort" );
@@ -13,6 +13,8 @@ service {
   "plan_it.plandb.calc_views::RevRateConv" as "RevenueRateConv" keys ("rev_rate_id");
   "plan_it.plandb::data.RevenueRate" as "RevenueRate" navigates( "RevRate_Conv" as "RevRateConv") ;
   "plan_it.plandb::data.PlanStructure" as "PlanStructure";
+  "plan_it.plandb.calc_views::TravelConv" as "Travel_Conv" keys ("id");
+  "plan_it.plandb::data.TravelVariant" as "TravelVariant" navigates("TrVar_Conv" as "TravelConv" );
   
   association "V_PlanAttributes" principal "Version"("id") 
   multiplicity "1" dependent "PlanAttributes"("version_id") multiplicity "*"; 
@@ -37,5 +39,11 @@ service {
   
   association "V_Wexp" principal "Version"("id") 
   multiplicity "1" dependent "StrElementWe"("version_id") multiplicity "*"; 
+  
+  association "V_TravelVariant" principal "Version"("id") 
+  multiplicity "1" dependent "TravelVariant"("version.id") multiplicity "*";
+  
+  association "TrVar_Conv" principal "TravelVariant"("id") 
+  multiplicity "1" dependent "Travel_Conv"("id") multiplicity "1";
 
 }
