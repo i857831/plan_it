@@ -200,7 +200,7 @@ view PlAttrTravel as
 	trav_var_name as trav_var_name, 
 	calc_type_tv as calc_type_tv
 	}, PlanAttributes.str_elemet.{ 
-	id as str_element_id, 
+	id as str_elem_id, 
 	tr_calc_type as tr_calc_type, 
 	contract_currency as contract_currency
 	}, PlanAttributes.revenue_rate.{ 

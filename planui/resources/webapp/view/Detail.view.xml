@@ -135,8 +135,63 @@
 					        <headerToolbar>
 					            <Toolbar width="100%" id="__toolbar2">
 					            <content>
-					                <Text text="Work Expenses" id="__text33"/>
+					                <Text text="Work Summary" id="__text33"/>
 					            </content>
+					            </Toolbar>
+					        </headerToolbar></Table>
+					    <Table noDataText="Drop column list items here and columns in the area above" id="__table7" items="{TravelSummary}">
+					        <items>
+					            <ColumnListItem id="__item7">
+					                <cells>
+					                    <Text text="{structure_element}" id="__text47"/>
+					                    <Text text="{period}" id="__text48"/>
+					                    <ObjectNumber number="{travel_effort}" unit="TA" id="__number19"/>
+					                    <ObjectNumber number="{tr_eff_exp_pc}" unit="{currency}" id="__number20"/>
+					                    <ObjectNumber number="{tr_exp_pc}" unit="{currency}" id="__number21"/>
+					                    <ObjectNumber number="{tr_eff_exp_rev_pc}" unit="{currency}" id="__number22"/>
+					                    <ObjectNumber number="{tr_exp_rev_pc}" unit="{currency}" id="__number23"/></cells>
+					            </ColumnListItem></items>
+					        <columns>
+					            <Column id="__column35">
+					                <header>
+					                    <Label text="Structure element" id="__label18"/>
+					                </header>
+					            </Column>
+					            <Column id="__column36">
+					                <header>
+					                    <Label text="Period" id="__label19"/>
+					                </header>
+					            </Column>
+					            <Column id="__column37">
+					                <header>
+					                    <Label text="Travel Effort" id="__label20"/>
+					                </header>
+					            </Column>
+					            <Column id="__column38">
+					                <header>
+					                    <Text text="Travel Effort Expenses" id="__text54"/>
+					                </header>
+					            </Column>
+					            <Column id="__column39">
+					                <header>
+					                    <Text text="Travel Expenses" id="__text55"/>
+					                </header>
+					            </Column>
+					            <Column id="__column40">
+					                <header>
+					                    <Text text="Travel Effort Expense Revenue" id="__text56"/>
+					                </header>
+					            </Column>
+					            <Column id="__column41">
+					                <header>
+					                    <Text text="Travel Expense Revenue" id="__text57"/>
+					                </header>
+					            </Column></columns>
+					        <headerToolbar>
+					            <Toolbar width="100%" id="__toolbar4">
+					                <content>
+					                    <Text text="Travel Summary" id="__text53"/>
+					                </content>
 					            </Toolbar>
 					        </headerToolbar></Table>
 					</content>
