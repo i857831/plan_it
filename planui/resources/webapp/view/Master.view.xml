@@ -34,6 +34,7 @@
 					id="list"
 					items="{
 						path: '/Version',
+						parameters: { expand: 'FinSummary' },
 						sorter: {
 							path: 'description',
 							descending: false
@@ -63,6 +64,7 @@
 							type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
 							press="onSelectionChange"
 							title="{description}"
+							number = "{FinSummary/TotalRevenue}"
 							numberUnit="{currency}">
 					</ObjectListItem>
 				</items>

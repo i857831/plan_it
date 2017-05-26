@@ -3,7 +3,10 @@
 	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 
 		<semantic:content>
-			<ObjectHeader id="objectHeader" title="{description}" numberUnit="{currency}">
+			<ObjectHeader id="objectHeader" title="{description}" number="{FinSummary/TotalRevenue}" numberUnit="{currency}">
+			<additionalNumbers>
+			    <ObjectNumber number="100" unit="Euro" id="__number25"/>
+			</additionalNumbers>
 			</ObjectHeader>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
@@ -30,7 +33,7 @@
 					                    </sap.ui.layout.form:FormElement>
 					                    <sap.ui.layout.form:FormElement label="Plan currency" id="__element3">
 					                    <sap.ui.layout.form:fields>
-					                        <Text text="{currency}" id="__text26"/>
+					                        <Input width="100%" id="__input0" liveChange="" maxLength="3" fieldWidth="10%" value="{currency}" change="_onCurrencyChange"/>
 					                    </sap.ui.layout.form:fields>
 					                    </sap.ui.layout.form:FormElement>
 					                </sap.ui.layout.form:formElements>
@@ -108,13 +111,14 @@
 					                </content>
 					            </Toolbar>
 					        </headerToolbar></Table>
-					    <Table noDataText="Drop column list items here and columns in the area above" id="__table5" items="{WorkExp}">
+					    <Table noDataText="Drop column list items here and columns in the area above" id="__table5" items="{path: 'VWorkSummary', sorter :{ path: 'str_el_descr'}}">
 					        <items>
 					            <ColumnListItem id="__item5">
 					                <cells>
 					                    <Text text="{str_el_descr}" id="__text28"/>
 					                    <Text text="{period}" id="__text29"/>
-					                    <ObjectNumber number="{WorkExpPC}" unit="{plan_currency}" id="__number5"/></cells>
+					                    <ObjectNumber number="{WorkExpPC}" unit="{currency}" id="__number5"/>
+					                    <ObjectNumber number="{Work_Revenue_PC}" unit="{currency}" id="__number24"/></cells>
 					            </ColumnListItem></items>
 					        <columns>
 					            <Column id="__column15">
@@ -129,7 +133,12 @@
 					            </Column>
 					            <Column id="__column17">
 					                <header>
-					                    <Label text="Work Expense" id="__label16"/>
+					                    <Label text="Work Expense PC" id="__label16"/>
+					                </header>
+					            </Column>
+					            <Column id="__column42">
+					                <header>
+					                    <Text text="Work Revenue PC" id="__text58"/>
 					                </header>
 					            </Column></columns>
 					        <headerToolbar>
@@ -204,7 +213,7 @@
 					                    <cells>
 					                        <Text text="{description}" id="__text11"/>
 					                        <ObjectNumber number="{cost_rate_tc}" unit="{currency_tc}" id="__number0"/>
-					                        <ObjectNumber number="{ResConv/cost_rate_pc}" unit="{ResConv/currency_pc}" id="__number1"/></cells>
+					                        <ObjectNumber number="{ResConv/cost_rate_pc}" unit="{currency}" id="__number1"/></cells>
 					                </ColumnListItem></items>
 					            <columns>
 					                <Column id="__column5">

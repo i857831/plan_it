@@ -246,6 +246,37 @@ sap.ui.define([
 				
 				
 			},
+			
+						_onCurrencyChange: function (oEvent) {
+				var oModel = this.getView( ).getModel( );
+				var newCurrency = oEvent.getParameter("value");
+				var updateModel = new sap.ui.model.odata.ODataModel("/plan.xsodata/", true);
+				var oContext = oEvent.getSource().getParent().getBindingContext();
+				var itemObject = oContext.getObject();
+				var Version={};
+				Version.id = itemObject.id;
+				Version.description = itemObject.description;
+				Version.startDate = itemObject.startDate;
+				Version.endDate = itemObject.endDate;
+				Version.currency = newCurrency;
+			
+				
+            updateModel.update(oContext.sPath,Version,
+         {
+           async : false,
+            success : function(oData, response) {
+              jQuery.sap.require("sap.m.MessageBox");
+               sap.m.MessageBox.alert("Updated successfully");
+              oModel.refresh();
+    			},
+    			error : function(oError) {
+        	  jQuery.sap.require("sap.m.MessageBox");
+               sap.m.MessageBox.alert("Error during update");  
+  
+  }});                           
+				
+				
+			},
 
 			_onMetadataLoaded : function () {
 				// Store original busy indicator delay for the detail view
