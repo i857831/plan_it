@@ -207,4 +207,20 @@ view PlAttrTravel as
 	id as rev_rate
 	}, PlanAttributes.remote_percent, EffortPlanning.effort, EffortPlanning.period, EffortPlanning.unit, EffortPlanning.id as effort_id};
 
-};    
+
+    context procedures{
+        table type efforts {
+    period : String(6);
+    effort : Decimal(10, 3);
+    unit   : String(3);
+        }
+        table type errors{
+    http_status_code : Integer;
+    error_message    : String(100);
+    detail           : String(100);
+        }
+    };
+}; 
+
+
+

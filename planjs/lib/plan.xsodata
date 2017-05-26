@@ -6,7 +6,7 @@ service {
   
   "plan_it.plandb::data.PlAttrDetail" as "PlanAttributes" keys ("ID")
   navigates( "PlAttr_Effort" as "Effort" );
-  "plan_it.plandb::data.EffortPlanning" as "EffortPlanning";
+  "plan_it.plandb::data.EffortPlanning" as "EffortPlanning" create using "plan_it.plandb.procedures::create_effort" ;
   "plan_it.plandb.calc_views::RecourceConv" as "ResourceConv" keys ("res_id");
   "plan_it.plandb.calc_views::StrElementWe" as "StrElementWe"  keys generate local "id";
    "plan_it.plandb.calc_views::StrElementTravel" as "StrElementTravel"  keys generate local "id";
@@ -49,5 +49,7 @@ service {
   
   association "TrVar_Conv" principal "TravelVariant"("id") 
   multiplicity "1" dependent "Travel_Conv"("id") multiplicity "1";
+
+
 
 }
