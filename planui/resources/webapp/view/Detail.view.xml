@@ -1,24 +1,17 @@
-<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar"
-	controllerName="plan.controller.Detail">
-	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
-		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="plan.controller.Detail">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
 			<ObjectHeader id="objectHeader" title="{description}" number="{FinSummary/TotalRevenue}" numberUnit="{currency}">
-				<additionalNumbers>
-					<ObjectNumber number="100" unit="Euro" id="__number25"/>
-				</additionalNumbers>
 			</ObjectHeader>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
-					<IconTabFilter xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar"
-						text="Version details" icon="sap-icon://detail-view" id="__filter3" design="Horizontal">
+					<IconTabFilter xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" text="Version details" icon="sap-icon://detail-view" id="__filter3" design="Horizontal">
 						<content>
 							<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form0">
 								<sap.ui.layout.form:formContainers>
 									<sap.ui.layout.form:FormContainer id="__container0">
 										<sap.ui.layout.form:formElements>
-											<sap.ui.layout.form:FormElement xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
-												xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:sap.ui.layout.form="sap.ui.layout.form" label="Description" id="__element2">
+											<sap.ui.layout.form:FormElement xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:sap.ui.layout.form="sap.ui.layout.form" label="Description" id="__element2">
 												<sap.ui.layout.form:fields>
 													<Text text="{description}" id="__text24"/>
 												</sap.ui.layout.form:fields>
@@ -35,7 +28,7 @@
 											</sap.ui.layout.form:FormElement>
 											<sap.ui.layout.form:FormElement label="Plan currency" id="__element3">
 												<sap.ui.layout.form:fields>
-													<Input width="100%" id="__input0" liveChange="" maxLength="3" fieldWidth="10%" value="{currency}" change="_onCurrencyChange"/>
+													<Input width="15%" id="__input0" liveChange="" maxLength="3" fieldWidth="10%" value="{currency}" change="_onCurrencyChange"/>
 												</sap.ui.layout.form:fields>
 											</sap.ui.layout.form:FormElement>
 										</sap.ui.layout.form:formElements>
@@ -47,11 +40,9 @@
 							</sap.ui.layout.form:Form>
 						</content>
 					</IconTabFilter>
-					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://simple-payment" tooltip="{i18n>detailIconTabBarInfo}" key="Planning" text="Planning"
-						design="Horizontal">
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://simple-payment" tooltip="{i18n>detailIconTabBarInfo}" key="Planning" text="Planning" design="Horizontal">
 						<content>
-							<Table noDataText="Drop column list items here and columns in the area above" id="__table0" items="{PlAttr}"
-								selectionChange="_onPlAttrSelected" mode="SingleSelectMaster">
+							<Table noDataText="Drop column list items here and columns in the area above" id="__table0" items="{PlAttr}" selectionChange="_onPlAttrSelected" mode="SingleSelectMaster">
 								<items>
 									<ColumnListItem id="__item0">
 										<cells>
@@ -120,8 +111,7 @@
 									</Toolbar>
 								</headerToolbar>
 							</Table>
-							<Table noDataText="Drop column list items here and columns in the area above" id="__table5"
-								items="{path: 'VWorkSummary', sorter :{ path: 'str_el_descr'}}">
+							<Table noDataText="Drop column list items here and columns in the area above" id="__table5" items="{path: 'VWorkSummary', sorter :{ path: 'str_el_descr'}}">
 									<items>
 										<ColumnListItem id="__item5">
 											<cells>
@@ -223,8 +213,7 @@
 						</IconTabFilter>
 						<IconTabFilter text="Resources" icon="sap-icon://employee" id="__filter0" design="Horizontal">
 							<content>
-								<Table noDataText="Drop column list items here and columns in the area above" id="__table2"
-									items="{path: 'VResources', parameters: {expand : 'ResConv'} }">
+								<Table noDataText="Drop column list items here and columns in the area above" id="__table2" items="{path: 'VResources', parameters: {expand : 'ResConv'} }">
 									<items>
 										<ColumnListItem id="__item2">
 											<cells>
@@ -255,8 +244,7 @@
 						</IconTabFilter>
 						<IconTabFilter text="Revenue Rates" icon="sap-icon://money-bills" id="__filter1" design="Horizontal">
 							<content>
-								<Table noDataText="Drop column list items here and columns in the area above" id="__table3"
-									items="{path: 'VRevRates', parameters: {expand : 'RevRateConv'} }">
+								<Table noDataText="Drop column list items here and columns in the area above" id="__table3" items="{path: 'VRevRates', parameters: {expand : 'RevRateConv'} }">
 									<items>
 										<ColumnListItem id="__item3">
 											<cells>
@@ -343,8 +331,7 @@
 						<IconTabFilter text="Travel Variants" icon="sap-icon://travel-itinerary" id="__filter4" design="Horizontal">
 							<content>
 								<Label text="Travel Expenses Parameters:" width="100%" id="__label17" design="Bold"/>
-								<Table noDataText="Drop column list items here and columns in the area above" id="__table6"
-									items="{path: 'TrVar', parameters: {expand : 'TravelConv'} }">
+								<Table noDataText="Drop column list items here and columns in the area above" id="__table6" items="{path: 'TrVar', parameters: {expand : 'TravelConv'} }">
 									<items>
 										<ColumnListItem id="__item6">
 											<cells>
@@ -404,8 +391,7 @@
 								</Table>
 								<Label width="100%" id="__label22"/>
 								<Label text="Travel Revenue Parameters:" width="100%" id="__label21" design="Bold"/>
-								<Table noDataText="Drop column list items here and columns in the area above" id="__table8"
-									items="{path: 'TrVar', parameters: {expand : 'TravelConv'} }">
+								<Table noDataText="Drop column list items here and columns in the area above" id="__table8" items="{path: 'TrVar', parameters: {expand : 'TravelConv'} }">
 									<items>
 										<ColumnListItem id="__item8">
 											<cells>
@@ -473,14 +459,5 @@
 					</items>
 				</IconTabBar>
 			</semantic:content>
-			<semantic:sendEmailAction>
-				<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-			</semantic:sendEmailAction>
-			<semantic:shareInJamAction>
-				<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
-			</semantic:shareInJamAction>
-			<semantic:saveAsTileAction>
-				<footerbar:AddBookmarkButton id="shareTile" title="{detailView>/saveAsTileTitle}"/>
-			</semantic:saveAsTileAction>
 		</semantic:DetailPage>
 	</mvc:View>
