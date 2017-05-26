@@ -1,7 +1,17 @@
 <mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="plan.controller.Detail">
 	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
-			<ObjectHeader id="objectHeader" title="{description}" number="{FinSummary/TotalRevenue}" numberUnit="{currency}">
+			<ObjectHeader id="objectHeader" title="{description}">
+			<attributes>
+			    <ObjectAttribute text="{FinSummary/TotalRevenue} {currency}" id="__attribute7" title="Total Revenue"/>
+			    <ObjectAttribute text="{FinSummary/TotalExpense} {currency}" id="__attribute8" title="Total Expense"/>
+			    <ObjectAttribute text="{FinSummary/Contribution} {currency}" id="__attribute0" title="Contribution"/>
+			    <ObjectAttribute text="{FinSummary/VSOE} {currency}" id="__attribute1" title="VSOE Midpoint"/>
+			</attributes>
+			<statuses>
+			    <ObjectStatus xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" text="{FinSummary/Profitability} %" id="__status0" title="Profitability" state="{= ${FinSummary/Profitability} &lt; 0  ? 'Error'  : 'Success' }" icon="{= ${FinSummary/Profitability} &lt; 0   ? 'sap-icon://alert'  : ' ' }"/>
+			    <ObjectStatus text="{FinSummary/VsoeDeviation} %" id="__status9" title="VSOE deviation" state="{= ${FinSummary/VsoeDeviation} &gt; 15  ? 'Error'  : 'Success' }" icon="{= ${FinSummary/VsoeDeviation} &gt; 15  ? 'sap-icon://alert'  : ' ' }"/>
+			</statuses>
 			</ObjectHeader>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
@@ -219,7 +229,7 @@
 											<cells>
 												<Text text="{description}" id="__text11"/>
 												<ObjectNumber number="{cost_rate_tc}" unit="{currency_tc}" id="__number0"/>
-												<ObjectNumber number="{ResConv/cost_rate_pc}" unit="{currency}" id="__number1"/></cells>
+												<ObjectNumber number="{ResConv/cost_rate_pc}" unit="{ResConv/currency_ver_res_pc}" id="__number1"/></cells>
 										</ColumnListItem>
 									</items>
 									<columns>

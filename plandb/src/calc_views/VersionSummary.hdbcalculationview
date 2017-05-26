@@ -169,10 +169,65 @@
     <measure id="TotalRevenue" order="1" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="17" scale="2" expressionLanguage="SQL">
       <descriptions defaultDescription="TotalRevenue"/>
       <formula>&quot;Work_Revenue_PC&quot;+&quot;tr_eff_exp_rev_pc&quot;+&quot;tr_exp_rev_pc&quot;</formula>
+      
+      
+      
+      
+      
+      
+      
+      
       </measure>
     <measure id="TotalExpense" order="10" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="17" scale="2" expressionLanguage="SQL">
       <descriptions defaultDescription=""/>
       <formula>&quot;WorkExpPC&quot;+&quot;tr_exp_pc&quot;+&quot;tr_eff_exp_pc&quot;</formula>
+      
+      
+      
+      
+      
+      
+      
+      
+      </measure>
+  
+    <measure id="Contribution" order="11" aggregationType="sum" measureType="simple" datatype="REAL" expressionLanguage="SQL">
+      <descriptions defaultDescription="Contribution"/>
+      <formula>&quot;TotalRevenue&quot;-&quot;TotalExpense&quot;</formula>
+      
+      
+      
+      
+      
+      
+      
+      </measure>
+    <measure id="Profitability" order="12" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="17" scale="2" expressionLanguage="SQL">
+      <descriptions defaultDescription="Profitability"/>
+      <formula>&quot;Contribution&quot;/&quot;TotalRevenue&quot; * 100</formula>
+      
+      
+      
+      
+      </measure>
+    <measure id="VsoeDeviation" order="13" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="17" expressionLanguage="COLUMN_ENGINE" scale="2">
+      <descriptions defaultDescription="Vsoe_deviation"/>
+      <formula>(&quot;TotalRevenue&quot;-&quot;VSOE&quot;)/&quot;VSOE&quot; * 100</formula>
+      
+      
+      
+      
+      
+      
+      
+      </measure>
+  
+    <measure id="VSOEState" order="14" aggregationType="count" measureType="simple" datatype="VARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+      <descriptions defaultDescription="VSOEState"/>
+      <formula>if(&quot;VsoeDeviation&quot; &gt; 15, 'Error', 'Success')</formula>
+      
+      
+      
       </measure>
   </calculatedMeasures>
   <restrictedMeasures/>
