@@ -1,8 +1,7 @@
 <mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="plan.controller.Detail">
 	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
-			<ObjectHeader id="objectHeader" title="{description}" number="{FinSummary/TotalRevenue}" numberUnit="{currency}">
-			</ObjectHeader>
+			<ObjectHeader id="objectHeader" title="{description}" numberUnit="{currency}"/>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
 					<IconTabFilter xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" text="Version details" icon="sap-icon://detail-view" id="__filter3" design="Horizontal">
@@ -28,7 +27,7 @@
 											</sap.ui.layout.form:FormElement>
 											<sap.ui.layout.form:FormElement label="Plan currency" id="__element3">
 												<sap.ui.layout.form:fields>
-													<Input width="15%" id="__input0" liveChange="" maxLength="3" fieldWidth="10%" value="{currency}" change="_onCurrencyChange"/>
+													<Text text="{currency}" id="__text26"/>
 												</sap.ui.layout.form:fields>
 											</sap.ui.layout.form:FormElement>
 										</sap.ui.layout.form:formElements>
@@ -111,353 +110,356 @@
 									</Toolbar>
 								</headerToolbar>
 							</Table>
-							<Table noDataText="Drop column list items here and columns in the area above" id="__table5" items="{path: 'VWorkSummary', sorter :{ path: 'str_el_descr'}}">
-									<items>
-										<ColumnListItem id="__item5">
-											<cells>
-												<Text text="{str_el_descr}" id="__text28"/>
-												<Text text="{period}" id="__text29"/>
-												<ObjectNumber number="{WorkExpPC}" unit="{currency}" id="__number5"/>
-												<ObjectNumber number="{Work_Revenue_PC}" unit="{currency}" id="__number24"/></cells>
-										</ColumnListItem>
-									</items>
-									<columns>
-										<Column id="__column15">
-											<header>
-												<Label text="Structure element" id="__label14"/>
-											</header>
-										</Column>
-										<Column id="__column16">
-											<header>
-												<Label text="Period" id="__label15"/>
-											</header>
-										</Column>
-										<Column id="__column17">
-											<header>
-												<Label text="Work Expense PC" id="__label16"/>
-											</header>
-										</Column>
-										<Column id="__column42">
-											<header>
-												<Text text="Work Revenue PC" id="__text58"/>
-											</header>
-										</Column>
-									</columns>
-									<headerToolbar>
-										<Toolbar width="100%" id="__toolbar2">
-											<content>
-												<Text text="Work Summary" id="__text33"/>
-											</content>
-										</Toolbar>
-									</headerToolbar>
-								</Table>
+							<Table noDataText="Drop column list items here and columns in the area above" id="__table5" items="{WorkExp}" showNoData="false">
+								<items>
+									<ColumnListItem id="__item5">
+										<cells>
+											<Text text="{str_el_descr}" id="__text28"/>
+											<Text text="{period}" id="__text29"/>
+											<ObjectNumber number="{WorkExpPC}" unit="{plan_currency}" id="__number5"/></cells>
+									</ColumnListItem>
+								</items>
+								<columns>
+									<Column id="__column15">
+										<header>
+											<Label text="Structure element" id="__label14"/>
+										</header>
+									</Column>
+									<Column id="__column16">
+										<header>
+											<Label text="Period" id="__label15"/>
+										</header>
+									</Column>
+									<Column id="__column17">
+										<header>
+											<Label text="Work Expense" id="__label16"/>
+										</header>
+									</Column>
+								</columns>
+								<headerToolbar>
+									<Toolbar width="100%" id="__toolbar2">
+										<content>
+											<Text text="Work Summary" id="__text33"/>
+										</content>
+									</Toolbar>
+								</headerToolbar>
+							</Table>
 							<Table noDataText="Drop column list items here and columns in the area above" id="__table7" items="{TravelSummary}">
-									<items>
-										<ColumnListItem id="__item7">
-											<cells>
-												<Text text="{structure_element}" id="__text47"/>
-												<Text text="{period}" id="__text48"/>
-												<ObjectNumber number="{travel_effort}" unit="TA" id="__number19"/>
-												<ObjectNumber number="{tr_eff_exp_pc}" unit="{currency}" id="__number20"/>
-												<ObjectNumber number="{tr_exp_pc}" unit="{currency}" id="__number21"/>
-												<ObjectNumber number="{tr_eff_exp_rev_pc}" unit="{currency}" id="__number22"/>
-												<ObjectNumber number="{tr_exp_rev_pc}" unit="{currency}" id="__number23"/></cells>
-										</ColumnListItem>
-									</items>
-									<columns>
-										<Column id="__column35">
-											<header>
-												<Label text="Structure element" id="__label18"/>
-											</header>
-										</Column>
-										<Column id="__column36">
-											<header>
-												<Label text="Period" id="__label19"/>
-											</header>
-										</Column>
-										<Column id="__column37">
-											<header>
-												<Label text="Travel Effort" id="__label20"/>
-											</header>
-										</Column>
-										<Column id="__column38">
-											<header>
-												<Text text="Travel Effort Expenses" id="__text54"/>
-											</header>
-										</Column>
-										<Column id="__column39">
-											<header>
-												<Text text="Travel Expenses" id="__text55"/>
-											</header>
-										</Column>
-										<Column id="__column40">
-											<header>
-												<Text text="Travel Effort Expense Revenue" id="__text56"/>
-											</header>
-										</Column>
-										<Column id="__column41">
-											<header>
-												<Text text="Travel Expense Revenue" id="__text57"/>
-											</header>
-										</Column>
-									</columns>
-									<headerToolbar>
-										<Toolbar width="100%" id="__toolbar4">
-											<content>
-												<Text text="Travel Summary" id="__text53"/>
-											</content>
-										</Toolbar>
-									</headerToolbar>
-								</Table>
-							</content>
-						</IconTabFilter>
-						<IconTabFilter text="Resources" icon="sap-icon://employee" id="__filter0" design="Horizontal">
-							<content>
-								<Table noDataText="Drop column list items here and columns in the area above" id="__table2" items="{path: 'VResources', parameters: {expand : 'ResConv'} }">
-									<items>
-										<ColumnListItem id="__item2">
-											<cells>
-												<Text text="{description}" id="__text11"/>
-												<ObjectNumber number="{cost_rate_tc}" unit="{currency_tc}" id="__number0"/>
-												<ObjectNumber number="{ResConv/cost_rate_pc}" unit="{currency}" id="__number1"/></cells>
-										</ColumnListItem>
-									</items>
-									<columns>
-										<Column id="__column5">
-											<header>
-												<Label text="Name" id="__label5"/>
-											</header>
-										</Column>
-										<Column id="__column6">
-											<header>
-												<Label text="Cost Rate TC" id="__label6"/>
-											</header>
-										</Column>
-										<Column id="__column7">
-											<header>
-												<Label text="Cost Rate PC" id="__label7"/>
-											</header>
-										</Column>
-									</columns>
-								</Table>
-							</content>
-						</IconTabFilter>
-						<IconTabFilter text="Revenue Rates" icon="sap-icon://money-bills" id="__filter1" design="Horizontal">
-							<content>
-								<Table noDataText="Drop column list items here and columns in the area above" id="__table3" items="{path: 'VRevRates', parameters: {expand : 'RevRateConv'} }">
-									<items>
-										<ColumnListItem id="__item3">
-											<cells>
-												<Text text="{description}" id="__text18"/>
-												<ObjectNumber number="{list_rate_tc}" unit="{currency_tc}" id="__number2"/>
-												<ObjectNumber number="{RevRateConv/list_rate_pc}" unit="{RevRateConv/currency_pc_ver_rev}" id="__number3"/>
-												<ObjectNumber number="{discount}" unit="%" id="__number6"/>
-												<ObjectNumber number="{RevRateConv/disc_rate_tc}" unit="{currency_tc}" id="__number7"/>
-												<ObjectNumber number="{RevRateConv/disc_rate_pc}" unit="{RevRateConv/currency_pc_ver_rev}" id="__number8"/></cells>
-										</ColumnListItem>
-									</items>
-									<columns>
-										<Column id="__column8">
-											<header>
-												<Label text="Name" id="__label8"/>
-											</header>
-										</Column>
-										<Column id="__column9">
-											<header>
-												<Label text="List rate TC" id="__label9"/>
-											</header>
-										</Column>
-										<Column id="__column10">
-											<header>
-												<Label text="List Rate PC" id="__label10"/>
-											</header>
-										</Column>
-										<Column id="__column19">
-											<header>
-												<Text text="Discount" id="__text31"/>
-											</header>
-										</Column>
-										<Column id="__column20">
-											<header>
-												<Text text="Discounted Rate TC" id="__text32"/>
-											</header>
-										</Column>
-										<Column id="__column21">
-											<header>
-												<Text text="Discounted Rate PC" id="__text34"/>
-											</header>
-										</Column>
-									</columns>
-								</Table>
-							</content>
-						</IconTabFilter>
-						<IconTabFilter text="Plan Structure" icon="sap-icon://sales-quote" id="__filter2" design="Horizontal">
-							<content>
-								<Table noDataText="Drop column list items here and columns in the area above" id="__table4" items="{path: 'PlanStr' }">
-									<items>
-										<ColumnListItem id="__item4">
-											<cells>
-												<Text text="{description}" id="__text19"/>
-												<Text text="{wr_calc_type}" id="__text20"/>
-												<Text text="{tr_calc_type}" id="__text21"/>
-												<ObjectNumber number="{fpp_amount}" unit="{contract_currency}" id="__number4"/></cells>
-										</ColumnListItem>
-									</items>
-									<columns>
-										<Column id="__column11">
-											<header>
-												<Label text="Name" id="__label11"/>
-											</header>
-										</Column>
-										<Column id="__column12">
-											<header>
-												<Label text="WR Calculation type" id="__label12"/>
-											</header>
-										</Column>
-										<Column id="__column13">
-											<header>
-												<Label text="TR Calculation type" id="__label13"/>
-											</header>
-										</Column>
-										<Column id="__column14">
-											<header>
-												<Text text="Contact amount" id="__text25"/>
-											</header>
-										</Column>
-									</columns>
-								</Table>
-							</content>
-						</IconTabFilter>
-						<IconTabFilter text="Travel Variants" icon="sap-icon://travel-itinerary" id="__filter4" design="Horizontal">
-							<content>
-								<Label text="Travel Expenses Parameters:" width="100%" id="__label17" design="Bold"/>
-								<Table noDataText="Drop column list items here and columns in the area above" id="__table6" items="{path: 'TrVar', parameters: {expand : 'TravelConv'} }">
-									<items>
-										<ColumnListItem id="__item6">
-											<cells>
-												<Text text="{trav_var_name}" id="__text36"/>
-												<Text text="{TravelConv/structure_element}" id="__text44"/>
-												<Text text="{calc_type_tv}" id="__text37"/>
-												<ObjectNumber number="{TravelConv/tr_exp_day_tc}" unit="{tr_cost_currency}" id="__number9"/>
-												<ObjectNumber number="{TravelConv/tr_exp_day_pc}" unit="{TravelConv/plan_currency}" id="__number10"/>
-												<ObjectNumber number="{work_cost_perc}" unit="%" id="__number11"/>
-												<ObjectNumber number="{TravelConv/tr_eff_day}" unit="H" id="__number15"/>
-												<Button width="60px" id="__button0" press="onOpenDialog" icon="sap-icon://display" iconDensityAware="false" type="Transparent"/>
-											</cells>
-										</ColumnListItem>
-									</items>
-									<columns>
-										<Column id="__column23">
-											<header>
-												<Text text="Travel variant name" id="__text45"/>
-											</header>
-										</Column>
-										<Column id="__column22">
-											<header>
-												<Text text="Structure Element" id="__text35"/>
-											</header>
-										</Column>
-										<Column id="__column24">
-											<header>
-												<Text text="Calculation type" id="__text46"/>
-											</header>
-										</Column>
-										<Column id="__column25">
-											<header>
-												<Text text="Travel exp. a WDay TC" id="__text41"/>
-											</header>
-										</Column>
-										<Column id="__column26">
-											<header>
-												<Text text="Travel exp. a WDay PC" id="__text15"/>
-											</header>
-										</Column>
-										<Column id="__column27">
-											<header>
-												<Text text="% of Work Cost" id="__text39"/>
-											</header>
-										</Column>
-										<Column id="__column31">
-											<header>
-												<Text text="Trav.Effort a Day" id="__text22"/>
-											</header>
-										</Column>
-										<Column id="__column43">
-											<header>
-												<Text id="__text51"/>
-											</header>
-										</Column>
-									</columns>
-								</Table>
-								<Label width="100%" id="__label22"/>
-								<Label text="Travel Revenue Parameters:" width="100%" id="__label21" design="Bold"/>
-								<Table noDataText="Drop column list items here and columns in the area above" id="__table8" items="{path: 'TrVar', parameters: {expand : 'TravelConv'} }">
-									<items>
-										<ColumnListItem id="__item8">
-											<cells>
-												<Text text="{trav_var_name}" id="__text59"/>
-												<Text text="{TravelConv/structure_element}" id="__text49"/></cells>
-											<Text text="{calc_type_tv}" id="__text60"/>
-											<ObjectNumber number="{trav_exp_reimb}" unit="%" id="__number30"/>
-											<ObjectNumber number="{trav_eff_reimb}" unit="%" id="__number31"/>
-											<ObjectNumber number="{TravelConv/tr_exp_lump_sum_tc}" unit="{TravelConv/contract_currency}" id="__number32"/>
-											<ObjectNumber number="{TravelConv/tr_exp_lump_sum_pc}" unit="{TravelConv/plan_currency}" id="__number33"/>
-											<ObjectNumber number="{TravelConv/tr_eff_lump_sum_tc}" unit="{TravelConv/contract_currency}" id="__number34"/>
-											<ObjectNumber number="{TravelConv/tr_eff_lump_sum_pc}" unit="{TravelConv/plan_currency}" id="__number35"/>
-										</ColumnListItem>
-									</items>
-									<columns>
-										<Column id="__column46">
-											<header>
-												<Text text="Travel variant name" id="__text65"/>
-											</header>
-										</Column>
-										<Column id="__column55">
-											<header>
-												<Text text="Structure Element" id="__text50"/>
-											</header>
-										</Column>
-										<Column id="__column47">
-											<header>
-												<Text text="Calculation type" id="__text66"/>
-											</header>
-										</Column>
-										<Column id="__column48">
-											<header>
-												<Text text="Travel Exp.Reimb." id="__text67"/>
-											</header>
-										</Column>
-										<Column id="__column49">
-											<header>
-												<Text text="Travel Eff.Reimb." id="__text68"/>
-											</header>
-										</Column>
-										<Column id="__column50">
-											<header>
-												<Text text="Travel Exp.Bill.Lump Sum TC" id="__text69"/>
-											</header>
-										</Column>
-										<Column id="__column51">
-											<header>
-												<Text text="Travel Exp.Bill.Lump Sum PC" id="__text70"/>
-											</header>
-										</Column>
-										<Column id="__column52">
-											<header>
-												<Text text="Travel Eff.Bill.Lump Sum TC" id="__text71"/>
-											</header>
-										</Column>
-										<Column id="__column53">
-											<header>
-												<Text text="Travel Eff.Bill.Lump Sum PC" id="__text72"/>
-											</header>
-										</Column>
-									</columns>
-								</Table>
-							</content>
-						</IconTabFilter>
-					</items>
-				</IconTabBar>
-			</semantic:content>
-		</semantic:DetailPage>
-	</mvc:View>
+								<items>
+									<ColumnListItem id="__item7">
+										<cells>
+											<Text text="{structure_element}" id="__text47"/>
+											<Text text="{period}" id="__text48"/>
+											<ObjectNumber number="{travel_effort}" unit="TA" id="__number19"/>
+											<ObjectNumber number="{tr_eff_exp_pc}" unit="{currency}" id="__number20"/>
+											<ObjectNumber number="{tr_exp_pc}" unit="{currency}" id="__number21"/>
+											<ObjectNumber number="{tr_eff_exp_rev_pc}" unit="{currency}" id="__number22"/>
+											<ObjectNumber number="{tr_exp_rev_pc}" unit="{currency}" id="__number23"/></cells>
+									</ColumnListItem>
+								</items>
+								<columns>
+									<Column id="__column35">
+										<header>
+											<Label text="Structure element" id="__label18"/>
+										</header>
+									</Column>
+									<Column id="__column36">
+										<header>
+											<Label text="Period" id="__label19"/>
+										</header>
+									</Column>
+									<Column id="__column37">
+										<header>
+											<Label text="Travel Effort" id="__label20"/>
+										</header>
+									</Column>
+									<Column id="__column38">
+										<header>
+											<Text text="Travel Effort Expenses" id="__text54"/>
+										</header>
+									</Column>
+									<Column id="__column39">
+										<header>
+											<Text text="Travel Expenses" id="__text55"/>
+										</header>
+									</Column>
+									<Column id="__column40">
+										<header>
+											<Text text="Travel Effort Expense Revenue" id="__text56"/>
+										</header>
+									</Column>
+									<Column id="__column41">
+										<header>
+											<Text text="Travel Expense Revenue" id="__text57"/>
+										</header>
+									</Column>
+								</columns>
+								<headerToolbar>
+									<Toolbar width="100%" id="__toolbar4">
+										<content>
+											<Text text="Travel Summary" id="__text53"/>
+										</content>
+									</Toolbar>
+								</headerToolbar>
+							</Table>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter text="Resources" icon="sap-icon://employee" id="__filter0" design="Horizontal">
+						<content>
+							<Table noDataText="Drop column list items here and columns in the area above" id="__table2" items="{path: 'VResources', parameters: {expand : 'ResConv'} }">
+								<items>
+									<ColumnListItem id="__item2">
+										<cells>
+											<Text text="{description}" id="__text11"/>
+											<ObjectNumber number="{cost_rate_tc}" unit="{currency_tc}" id="__number0"/>
+											<ObjectNumber number="{ResConv/cost_rate_pc}" unit="{ResConv/currency_pc}" id="__number1"/></cells>
+									</ColumnListItem>
+								</items>
+								<columns>
+									<Column id="__column5">
+										<header>
+											<Label text="Name" id="__label5"/>
+										</header>
+									</Column>
+									<Column id="__column6">
+										<header>
+											<Label text="Cost Rate TC" id="__label6"/>
+										</header>
+									</Column>
+									<Column id="__column7">
+										<header>
+											<Label text="Cost Rate PC" id="__label7"/>
+										</header>
+									</Column>
+								</columns>
+							</Table>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter text="Revenue Rates" icon="sap-icon://money-bills" id="__filter1" design="Horizontal">
+						<content>
+							<Table noDataText="Drop column list items here and columns in the area above" id="__table3" items="{path: 'VRevRates', parameters: {expand : 'RevRateConv'} }">
+								<items>
+									<ColumnListItem id="__item3">
+										<cells>
+											<Text text="{description}" id="__text18"/>
+											<ObjectNumber number="{list_rate_tc}" unit="{currency_tc}" id="__number2"/>
+											<ObjectNumber number="{RevRateConv/list_rate_pc}" unit="{RevRateConv/currency_pc_ver_rev}" id="__number3"/>
+											<ObjectNumber number="{discount}" unit="%" id="__number6"/>
+											<ObjectNumber number="{RevRateConv/disc_rate_tc}" unit="{currency_tc}" id="__number7"/>
+											<ObjectNumber number="{RevRateConv/disc_rate_pc}" unit="{RevRateConv/currency_pc_ver_rev}" id="__number8"/></cells>
+									</ColumnListItem>
+								</items>
+								<columns>
+									<Column id="__column8">
+										<header>
+											<Label text="Name" id="__label8"/>
+										</header>
+									</Column>
+									<Column id="__column9">
+										<header>
+											<Label text="List rate TC" id="__label9"/>
+										</header>
+									</Column>
+									<Column id="__column10">
+										<header>
+											<Label text="List Rate PC" id="__label10"/>
+										</header>
+									</Column>
+									<Column id="__column19">
+										<header>
+											<Text text="Discount" id="__text31"/>
+										</header>
+									</Column>
+									<Column id="__column20">
+										<header>
+											<Text text="Discounted Rate TC" id="__text32"/>
+										</header>
+									</Column>
+									<Column id="__column21">
+										<header>
+											<Text text="Discounted Rate PC" id="__text34"/>
+										</header>
+									</Column>
+								</columns>
+							</Table>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter text="Plan Structure" icon="sap-icon://sales-quote" id="__filter2" design="Horizontal">
+						<content>
+							<Table noDataText="Drop column list items here and columns in the area above" id="__table4" items="{path: 'PlanStr' }">
+								<items>
+									<ColumnListItem id="__item4">
+										<cells>
+											<Text text="{description}" id="__text19"/>
+											<Text text="{wr_calc_type}" id="__text20"/>
+											<Text text="{path:'tr_calc_type', formatter:'.formatter.textFormat'}" id="__text21"/>
+											<ObjectNumber number="{fpp_amount}" unit="{contract_currency}" id="__number4"/></cells>
+									</ColumnListItem>
+								</items>
+								<columns>
+									<Column id="__column11">
+										<header>
+											<Label text="Name" id="__label11"/>
+										</header>
+									</Column>
+									<Column id="__column12">
+										<header>
+											<Label text="WR Calculation type" id="__label12"/>
+										</header>
+									</Column>
+									<Column id="__column13">
+										<header>
+											<Label text="TR Calculation type" id="__label13"/>
+										</header>
+									</Column>
+									<Column id="__column14">
+										<header>
+											<Text text="Contact amount" id="__text25"/>
+										</header>
+									</Column>
+								</columns>
+							</Table>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter text="Travel Variants" icon="sap-icon://travel-itinerary" id="__filter4" design="Horizontal">
+						<content>
+							<Label text="Travel Expenses Parameters:" width="100%" id="__label17" design="Bold"/>
+							<Table noDataText="Drop column list items here and columns in the area above" id="__table6" items="{path: 'TrVar', parameters: {expand : 'TravelConv'} }">
+								<items>
+									<ColumnListItem id="__item6">
+										<cells>
+											<Text text="{trav_var_name}" id="__text36"/>
+											<Text text="{TravelConv/structure_element}" id="__text44"/>
+											<Text text="{path: 'calc_type_tv' ,formatter:'.formatter.textFormat'}" id="__text37"  />
+											<ObjectNumber number="{TravelConv/tr_exp_day_tc}" unit="{tr_cost_currency}" id="__number9"/>
+											<ObjectNumber number="{TravelConv/tr_exp_day_pc}" unit="{TravelConv/plan_currency}" id="__number10"/>
+											<ObjectNumber number="{work_cost_perc}" unit="%" id="__number11"/>
+											<ObjectNumber number="{TravelConv/tr_eff_day}" unit="H" id="__number15"/>
+											<Button width="60px" id="__button0" press="onOpenDialog" icon="sap-icon://display" iconDensityAware="false" type="Transparent"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+								<columns>
+									<Column id="__column23">
+										<header>
+											<Text text="Travel variant name" id="__text45"/>
+										</header>
+									</Column>
+									<Column id="__column22">
+										<header>
+											<Text text="Structure Element" id="__text35"/>
+										</header>
+									</Column>
+									<Column id="__column24">
+										<header>
+											<Text text="Calculation type" id="__text46"/>
+										</header>
+									</Column>
+									<Column id="__column25">
+										<header>
+											<Text text="Travel exp. a WDay TC" id="__text41"/>
+										</header>
+									</Column>
+									<Column id="__column26">
+										<header>
+											<Text text="Travel exp. a WDay PC" id="__text15"/>
+										</header>
+									</Column>
+									<Column id="__column27">
+										<header>
+											<Text text="% of Work Cost" id="__text39"/>
+										</header>
+									</Column>
+									<Column id="__column31">
+										<header>
+											<Text text="Trav.Effort a Day" id="__text22"/>
+										</header>
+									</Column>
+									<Column id="__column43">
+										<header>
+											<Text id="__text51"/>
+										</header>
+									</Column>
+								</columns>
+							</Table>
+							<Label width="100%" id="__label22"/>
+							<Label text="Travel Revenue Parameters:" width="100%" id="__label21" design="Bold"/>
+							<Table noDataText="Drop column list items here and columns in the area above" id="__table8" items="{path: 'TrVar', parameters: {expand : 'TravelConv'} }">
+								<items>
+									<ColumnListItem id="__item8">
+										<cells>
+											<Text text="{trav_var_name}" id="__text59"/>
+											<Text text="{TravelConv/structure_element}" id="__text49"/></cells>
+										<Text text="{path :'calc_type_tv', formatter:'.formatter.textFormat'}" id="__text60"/>
+										<ObjectNumber number="{trav_exp_reimb}" unit="%" id="__number24"/>
+										<ObjectNumber number="{trav_eff_reimb}" unit="%" id="__number25"/>
+										<ObjectNumber number="{TravelConv/tr_exp_lump_sum_tc}" unit="{TravelConv/contract_currency}" id="__number26"/>
+										<ObjectNumber number="{TravelConv/tr_exp_lump_sum_pc}" unit="{TravelConv/plan_currency}" id="__number27"/>
+										<ObjectNumber number="{TravelConv/tr_eff_lump_sum_tc}" unit="{TravelConv/contract_currency}" id="__number28"/>
+										<ObjectNumber number="{TravelConv/tr_eff_lump_sum_pc}" unit="{TravelConv/plan_currency}" id="__number29"/>
+									</ColumnListItem>
+								</items>
+								<columns>
+									<Column id="__column46">
+										<header>
+											<Text text="Travel variant name" id="__text65"/>
+										</header>
+									</Column>
+									<Column id="__column42">
+										<header>
+											<Text text="Structure Element" id="__text50"/>
+										</header>
+									</Column>
+									<Column id="__column47">
+										<header>
+											<Text text="Calculation type" id="__text66"/>
+										</header>
+									</Column>
+									<Column id="__column48">
+										<header>
+											<Text text="Travel Exp.Reimb." id="__text67"/>
+										</header>
+									</Column>
+									<Column id="__column49">
+										<header>
+											<Text text="Travel Eff.Reimb." id="__text68"/>
+										</header>
+									</Column>
+									<Column id="__column50">
+										<header>
+											<Text text="Travel Exp.Bill.Lump Sum TC" id="__text69"/>
+										</header>
+									</Column>
+									<Column id="__column51">
+										<header>
+											<Text text="Travel Exp.Bill.Lump Sum PC" id="__text70"/>
+										</header>
+									</Column>
+									<Column id="__column52">
+										<header>
+											<Text text="Travel Eff.Bill.Lump Sum TC" id="__text71"/>
+										</header>
+									</Column>
+									<Column id="__column53">
+										<header>
+											<Text text="Travel Eff.Bill.Lump Sum PC" id="__text72"/>
+										</header>
+									</Column>
+								</columns>
+							</Table>
+						</content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{detailView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+	</semantic:DetailPage>
+</mvc:View>
