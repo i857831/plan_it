@@ -1,7 +1,6 @@
 <mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="plan.controller.Detail">
 	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
-
 			<ObjectHeader id="objectHeader" title="{description}">
 			<attributes>
 			    <ObjectAttribute text="{FinSummary/TotalRevenue} {currency}" id="__attribute7" title="Total Revenue"/>
@@ -14,6 +13,9 @@
 			    <ObjectStatus text="{FinSummary/VsoeDeviation} %" id="__status9" title="VSOE deviation" state="{= ${FinSummary/VsoeDeviation} &gt; 15  ? 'Error'  : 'Success' }" icon="{= ${FinSummary/VsoeDeviation} &gt; 15  ? 'sap-icon://alert'  : ' ' }"/>
 			</statuses>
 			</ObjectHeader>
+
+			<ObjectHeader id="objectHeader" title="{description}" numberUnit="{currency}"/>
+
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
 					<IconTabFilter xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" text="Version details" icon="sap-icon://detail-view" id="__filter3" design="Horizontal">
@@ -38,9 +40,15 @@
 												</sap.ui.layout.form:fields>
 											</sap.ui.layout.form:FormElement>
 											<sap.ui.layout.form:FormElement label="Plan currency" id="__element3">
+
 											<sap.ui.layout.form:fields>
 											    <Input width="15%" id="__input0" submit="_onCurrencyChange" value="{currency}"/>
 											</sap.ui.layout.form:fields>
+
+												<sap.ui.layout.form:fields>
+													<Text text="{currency}" id="__text26"/>
+												</sap.ui.layout.form:fields>
+
 											</sap.ui.layout.form:FormElement>
 										</sap.ui.layout.form:formElements>
 									</sap.ui.layout.form:FormContainer>
@@ -51,6 +59,7 @@
 							</sap.ui.layout.form:Form>
 						</content>
 					</IconTabFilter>
+
 					<IconTabFilter xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns="sap.m" text="Plan Structure" icon="sap-icon://sales-quote" id="__filter2" design="Horizontal">
 					    <content>
 					        <Table noDataText="Drop column list items here and columns in the area above" id="__table4" items="{path: 'PlanStr' }">
@@ -540,3 +549,4 @@
 			</semantic:content>
 		</semantic:DetailPage>
 	</mvc:View>
+
