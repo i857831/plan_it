@@ -13,9 +13,6 @@
 			    <ObjectStatus text="{FinSummary/VsoeDeviation} %" id="__status9" title="VSOE deviation" state="{= ${FinSummary/VsoeDeviation} &gt; 15  ? 'Error'  : 'Success' }" icon="{= ${FinSummary/VsoeDeviation} &gt; 15  ? 'sap-icon://alert'  : ' ' }"/>
 			</statuses>
 			</ObjectHeader>
-
-			<ObjectHeader id="objectHeader" title="{description}" numberUnit="{currency}"/>
-
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
 					<IconTabFilter xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" text="Version details" icon="sap-icon://detail-view" id="__filter3" design="Horizontal">
@@ -44,11 +41,6 @@
 											<sap.ui.layout.form:fields>
 											    <Input width="15%" id="__input0" submit="_onCurrencyChange" value="{currency}"/>
 											</sap.ui.layout.form:fields>
-
-												<sap.ui.layout.form:fields>
-													<Text text="{currency}" id="__text26"/>
-												</sap.ui.layout.form:fields>
-
 											</sap.ui.layout.form:FormElement>
 										</sap.ui.layout.form:formElements>
 									</sap.ui.layout.form:FormContainer>
